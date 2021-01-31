@@ -1,0 +1,6 @@
+<h1>Project show page</h1>
+
+<h2><%= @project.title %></h2>
+<p><%= @project.content %></p>
+
+<%= link_to "Delete Project", project_path(@project), method: :delete %>
