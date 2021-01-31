@@ -10,7 +10,17 @@ RSpec.feature 'Users can create project' do
 
     click_button 'Create Project'
 
+    expect(page).to have_content 'Project has been created.'
     expect(page).to have_content 'write a blog'
     expect(page).to have_content 'blog content'
+  end
+
+  scenario 'with invalid inputs' do
+    visit new_project_path
+    click_button 'Create Project'
+
+    expect(page).to have_content 'Project has not been created.'
+    expect(page).to have_content "Title can't be blank"
+    expect(page).to have_content "Content can't be blank"
   end
 end
