@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show]
+  before_action :set_project, only: [:show, :edit, :update]
   def new
     @project = Project.new
   end
@@ -17,6 +17,20 @@ class ProjectsController < ApplicationController
   end
 
   def show; end
+
+  def edit
+  end
+
+  def update
+
+    if @project.update(project_params)
+      flash[:notice] = 'Project has been updated.'
+      redirect_to project_path(@project)
+    else
+      flash[:alert] = 'Project has not been updated.'
+      render :edit
+    end
+  end
 
   private
 
