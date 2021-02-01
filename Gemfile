@@ -35,6 +35,7 @@ group :development, :test do
   gem 'capybara', '~> 3.35', '>= 3.35.1'
   gem 'pry-byebug', '~> 3.9'
   gem 'factory_bot_rails', '~> 6.1'
+  gem 'launchy', '~> 2.4', '>= 2.4.3'
 end
 
 group :development do

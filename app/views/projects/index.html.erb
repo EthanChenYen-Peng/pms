@@ -1,8 +1,9 @@
 <h1>Projects page</h1>
-
+<%= t :hello %>
 <%= @projects.each do |project| %>
+   
   <h1>
-    <%= project.title %>
+    <%= link_to project.title, project_path(project) %>
   </h1>
   <p><%= project.content %></p>
 <% end %>

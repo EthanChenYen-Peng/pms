@@ -1,3 +1,4 @@
+require 'pry'
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
 
@@ -13,10 +14,10 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
-      flash[:notice] = 'Project has been created.'
+      flash[:notice] = t('project.create.success')
       redirect_to project_path(@project)
     else
-      flash[:alert] = 'Project has not been created.'
+      flash[:alert] = t('project.create.failure')
       render :new
     end
   end
@@ -27,17 +28,17 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      flash[:notice] = 'Project has been updated.'
+      flash[:notice] = t('project.update.success')
       redirect_to project_path(@project)
     else
-      flash[:alert] = 'Project has not been updated.'
+      flash[:alert] = t('project.update.failure')
       render :edit
     end
   end
 
   def destroy
     @project.destroy
-    flash[:notice] = 'Project has been deleted.'
+    flash[:notice] = t('project.delete.success')
     redirect_to projects_path
   end
 

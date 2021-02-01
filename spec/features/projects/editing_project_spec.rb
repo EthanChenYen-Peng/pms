@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature 'Users can edit projects' do
   let(:project) { FactoryBot.create(:project) }
   scenario 'with valid inputs' do
-    visit edit_project_path(project)
+    visit edit_project_path(locale: :en, id: project.id)
 
     fill_in 'project[title]', with: 'New title'
     fill_in 'project[content]', with: 'New content'
@@ -16,7 +16,7 @@ RSpec.feature 'Users can edit projects' do
   end
 
   scenario 'with invalid inputs' do
-    visit edit_project_path(project)
+    visit edit_project_path(locale: :en, id: project.id)
 
     fill_in 'project[title]', with: ''
     fill_in 'project[content]', with: 'New content'
