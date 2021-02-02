@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.feature 'Users can delete projects' do
-  let(:project) { FactoryBot.create(:project) }
+  let!(:project) { FactoryBot.create(:project) }
 
   # TODO: User should only be able to delete her own project.
   scenario 'successfully deleting a project' do
+    visit root_path
 
-    visit project_path(locale: :en, id: project.id)
+    click_link project.title
     click_link 'Delete Project'
 
     expect(page).to have_content 'Project has been deleted.'
