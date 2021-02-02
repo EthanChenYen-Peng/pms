@@ -9,3 +9,12 @@ zh-TW:
     delete:
       success: '專案已刪除'
       failure: '專案失刪除敗'
+  activerecord:
+    errors:
+      models:
+        project:
+          attributes:
+            title: 
+              blank: '標題不能為空'
+            content: 
+              blank: '內容不能為空'
