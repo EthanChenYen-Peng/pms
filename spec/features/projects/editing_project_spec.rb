@@ -1,29 +1,73 @@
 require 'rails_helper'
 
 RSpec.feature 'Users can edit projects' do
-  let(:project) { FactoryBot.create(:project) }
-  scenario 'with valid inputs' do
-    visit edit_project_path(project)
+  context 'locale: en' do
+    scenario 'with valid inputs' do
+      project = FactoryBot.create(:project)
+      visit root_path
 
-    fill_in 'project[title]', with: 'New title'
-    fill_in 'project[content]', with: 'New content'
+      click_link project.title
+      click_link 'Edit Project'
 
-    click_button 'Update Project'
+      fill_in 'project[title]', with: 'New title'
+      fill_in 'project[content]', with: 'New content'
 
-    expect(page).to have_content 'Project has been updated.'
-    expect(page).to have_content 'New title'
-    expect(page).to have_content 'New content'
+      click_button 'Update Project'
+
+      expect(page).to have_content 'Project has been updated.'
+      expect(page).to have_content 'New title'
+      expect(page).to have_content 'New content'
+    end
+
+    scenario 'with invalid inputs' do
+      project = FactoryBot.create(:project)
+      visit root_path
+
+      click_link project.title
+      click_link 'Edit Project'
+
+      fill_in 'project[title]', with: ''
+      fill_in 'project[content]', with: 'New content'
+
+      click_button 'Update Project'
+
+      expect(page).to have_content 'Project has not been updated.'
+      expect(page).to have_content "Title can't be blank"
+    end
   end
 
-  scenario 'with invalid inputs' do
-    visit edit_project_path(project)
+  context 'locale: zh-TW' do
+    scenario 'with valid inputs' do
+      project = FactoryBot.create(:project)
+      visit root_path(locale: 'zh-TW')
 
-    fill_in 'project[title]', with: ''
-    fill_in 'project[content]', with: 'New content'
+      click_link project.title
+      click_link 'Edit Project'
 
-    click_button 'Update Project'
+      fill_in 'project[title]', with: 'New title'
+      fill_in 'project[content]', with: 'New content'
 
-    expect(page).to have_content 'Project has not been updated.'
-    expect(page).to have_content "Title can't be blank"
+      click_button 'Update Project'
+
+      expect(page).to have_content '專案已更新'
+      expect(page).to have_content 'New title'
+      expect(page).to have_content 'New content'
+    end
+
+    scenario 'with invalid inputs' do
+      project = FactoryBot.create(:project)
+      visit root_path(locale: 'zh-TW')
+
+      click_link project.title
+      click_link 'Edit Project'
+
+      fill_in 'project[title]', with: ''
+      fill_in 'project[content]', with: 'New content'
+
+      click_button 'Update Project'
+
+      expect(page).to have_content '專案更新失敗'
+      expect(page).to have_content '標題不能為空'
+    end
   end
 end

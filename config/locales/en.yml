@@ -30,4 +30,13 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  project:
+    create:
+      success: 'Project has been created.'
+      failure: 'Project has not been created.'
+    update:
+      success: 'Project has been updated.'
+      failure: 'Project has not been updated.'
+    delete:
+      success: 'Project has been deleted.'
+      failure: 'Project has not been deleted.'

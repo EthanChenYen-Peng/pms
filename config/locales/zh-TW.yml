@@ -1,0 +1,20 @@
+zh-TW:
+  project:
+    create:
+      success: '專案已創建'
+      failure: '專案創建失敗'
+    update:
+      success: '專案已更新'
+      failure: '專案更新失敗'
+    delete:
+      success: '專案已刪除'
+      failure: '專案失刪除敗'
+  activerecord:
+    errors:
+      models:
+        project:
+          attributes:
+            title: 
+              blank: '標題不能為空'
+            content: 
+              blank: '內容不能為空'
