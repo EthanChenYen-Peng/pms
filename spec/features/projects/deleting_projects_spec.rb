@@ -23,7 +23,7 @@ RSpec.feature 'Users can delete projects' do
       visit root_path(locale: 'zh-TW')
 
       click_link project.title
-      click_link 'Delete Project'
+      click_link '刪除專案'
 
       expect(page).to have_content '專案已刪除'
       expect(current_path).to eq projects_path(locale: 'zh-TW')

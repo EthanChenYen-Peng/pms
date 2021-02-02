@@ -17,6 +17,6 @@ RSpec.describe Project do
 
     project.save
     expect(project.errors.any?).to be(true)
-    expect(project.errors[:title]).to match_array(["has already been taken"])
+    expect(project.errors[:title]).to match_array(['has already been taken'])
   end
 end

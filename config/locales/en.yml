@@ -40,3 +40,8 @@ en:
     delete:
       success: 'Project has been deleted.'
       failure: 'Project has not been deleted.'
+
+  links:
+    project:
+      edit: 'Edit Project'
+      delete: 'Delete Project'

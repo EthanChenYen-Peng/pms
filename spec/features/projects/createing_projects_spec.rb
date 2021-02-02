@@ -43,7 +43,7 @@ RSpec.feature 'Users can create project' do
       fill_in 'project[title]', with: 'write a blog'
       fill_in 'project[content]', with: 'blog content'
 
-      click_button 'Create Project'
+      click_button '新專案'
 
       expect(page).to have_content '專案已創建'
       expect(page).to have_content 'write a blog'
@@ -52,7 +52,7 @@ RSpec.feature 'Users can create project' do
 
     scenario 'with invalid inputs' do
       visit new_project_path(locale: 'zh-TW')
-      click_button 'Create Project'
+      click_button '新專案'
 
       expect(page).to have_content '專案創建失敗'
       expect(page).to have_content '標題不能為空'
@@ -64,7 +64,7 @@ RSpec.feature 'Users can create project' do
       visit new_project_path(locale: 'zh-TW')
       fill_in 'project[title]', with: 'project1'
       fill_in 'project[content]', with: 'blog content'
-      click_button 'Create Project'
+      click_button '新專案'
 
       expect(page).to have_content '專案創建失敗'
       expect(page).to have_content '標題已經存在'
