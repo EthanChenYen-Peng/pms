@@ -36,6 +36,7 @@ group :development, :test do
   gem 'pry-byebug', '~> 3.9'
   gem 'factory_bot_rails', '~> 6.1'
   gem 'launchy', '~> 2.4', '>= 2.4.3'
+  gem 'faker', '~> 2.15', '>= 2.15.1'
 end
 
 group :development do
