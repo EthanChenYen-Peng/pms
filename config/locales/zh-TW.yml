@@ -16,5 +16,6 @@ zh-TW:
           attributes:
             title: 
               blank: '標題不能為空'
+              taken: '標題已經存在'
             content: 
               blank: '內容不能為空'
