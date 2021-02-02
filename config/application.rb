@@ -37,6 +37,8 @@ module Pms
     end
     I18n.available_locales = [:en, :"zh-TW"]
     I18n.default_locale = :en
+
+    config.time_zone = 'Asia/Taipei'
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
