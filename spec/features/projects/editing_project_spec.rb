@@ -42,12 +42,12 @@ RSpec.feature 'Users can edit projects' do
       visit root_path(locale: 'zh-TW')
 
       click_link project.title
-      click_link 'Edit Project'
+      click_link '編輯專案'
 
       fill_in 'project[title]', with: 'New title'
       fill_in 'project[content]', with: 'New content'
 
-      click_button 'Update Project'
+      click_button '更新專案'
 
       expect(page).to have_content '專案已更新'
       expect(page).to have_content 'New title'
@@ -59,12 +59,12 @@ RSpec.feature 'Users can edit projects' do
       visit root_path(locale: 'zh-TW')
 
       click_link project.title
-      click_link 'Edit Project'
+      click_link '編輯專案'
 
       fill_in 'project[title]', with: ''
       fill_in 'project[content]', with: 'New content'
 
-      click_button 'Update Project'
+      click_button '更新專案'
 
       expect(page).to have_content '專案更新失敗'
       expect(page).to have_content '標題不能為空'

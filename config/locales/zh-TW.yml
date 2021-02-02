@@ -10,11 +10,27 @@ zh-TW:
       success: '專案已刪除'
       failure: '專案失刪除敗'
   activerecord:
+    models:
+      project:
+        one: '專案'
+    attributes:
+      project:
+        title: '標題'
+        content: '內容'
     errors:
       models:
         project:
           attributes:
             title: 
               blank: '標題不能為空'
+              taken: '標題已經存在'
             content: 
               blank: '內容不能為空'
+  helpers:
+    submit:
+      create: "新%{model}"
+      update: "更新%{model}"
+  links:
+    project:
+      edit: '編輯專案'
+      delete: '刪除專案'
