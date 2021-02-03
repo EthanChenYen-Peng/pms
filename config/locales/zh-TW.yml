@@ -31,6 +31,17 @@ zh-TW:
       create: "新%{model}"
       update: "更新%{model}"
   links:
+    root: '主頁'
+    projects:
+      index: '專案'
     project:
+      new: '新專案'
       edit: '編輯專案'
       delete: '刪除專案'
+  datetime:
+    distance_in_words:
+      about_x_hours: "%{count} 小時前"
+      about_x_minutes: "%{count} 分鐘前"
+      about_x_days: "%{count} 幾天前"
+      about_x_months: "%{count} 個月前"
+

@@ -1,6 +1,27 @@
-<div>
-  <ul>
-    <li><%= link_to "English", root_path(locale: :en) %></li>
-    <li><%= link_to "中文", root_path(locale: 'zh-TW') %></li>
-  </ul>
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <%= link_to "PMS", root_path, class: 'navbar-brand' %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to t('links.root'), root_path, class: 'nav-link' %>
+      </li> 
+      <li class="nav-item">
+        <%= link_to t('links.projects.index'), projects_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to t('links.project.new'), new_project_path, class: 'nav-link' %>
+      </li>
+   </ul>
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <%= link_to "English", root_path(locale: :en) ,class: "nav-link #{ "active" if get_locale == 'en'}"%>
+      </li>
+      <li class="nav-item">
+        <%= link_to "中文", root_path(locale: 'zh-TW'),class:  "nav-link #{ "active" if get_locale == 'zh-TW'}"%>
+      </li>
+    </ul>
+  </div>
+</nav>

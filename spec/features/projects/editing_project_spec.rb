@@ -4,7 +4,7 @@ RSpec.feature 'Users can edit projects' do
   context 'locale: en' do
     scenario 'with valid inputs' do
       project = FactoryBot.create(:project)
-      visit root_path
+      visit projects_path
 
       click_link project.title
       click_link 'Edit Project'
@@ -21,7 +21,7 @@ RSpec.feature 'Users can edit projects' do
 
     scenario 'with invalid inputs' do
       project = FactoryBot.create(:project)
-      visit root_path
+      visit projects_path
 
       click_link project.title
       click_link 'Edit Project'
@@ -39,7 +39,7 @@ RSpec.feature 'Users can edit projects' do
   context 'locale: zh-TW' do
     scenario 'with valid inputs' do
       project = FactoryBot.create(:project)
-      visit root_path(locale: 'zh-TW')
+      visit projects_path(locale: 'zh-TW')
 
       click_link project.title
       click_link '編輯專案'
@@ -56,7 +56,7 @@ RSpec.feature 'Users can edit projects' do
 
     scenario 'with invalid inputs' do
       project = FactoryBot.create(:project)
-      visit root_path(locale: 'zh-TW')
+      visit projects_path(locale: 'zh-TW')
 
       click_link project.title
       click_link '編輯專案'
