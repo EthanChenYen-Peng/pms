@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  http_basic_authenticate_with name: 'pms', password: 'pms-password' if Rails.env.production?
   around_action :switch_locale
 
   def switch_locale(&action)

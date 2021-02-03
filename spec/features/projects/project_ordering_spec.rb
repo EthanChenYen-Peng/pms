@@ -1,4 +1,3 @@
-require 'pry'
 require 'rails_helper'
 
 RSpec.feature 'Projects are sorted' do
