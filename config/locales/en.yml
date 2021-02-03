@@ -42,6 +42,10 @@ en:
       failure: 'Project has not been deleted.'
 
   links:
+    root: 'Home'
+    projects:
+      index: 'Projects'
     project:
+      new: 'New Project'
       edit: 'Edit Project'
       delete: 'Delete Project'

@@ -6,7 +6,7 @@ RSpec.feature 'Users can delete projects' do
   # TODO: User should only be able to delete her own project.
   context 'locale: en' do
     scenario 'successfully deleting a project' do
-      visit root_path
+      visit projects_path
 
       click_link project.title
       click_link 'Delete Project'
@@ -20,7 +20,7 @@ RSpec.feature 'Users can delete projects' do
 
   context 'locale: zh-TW' do
     scenario 'successfully deleting a project' do
-      visit root_path(locale: 'zh-TW')
+      visit projects_path(locale: 'zh-TW')
 
       click_link project.title
       click_link '刪除專案'

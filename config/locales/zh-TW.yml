@@ -31,7 +31,11 @@ zh-TW:
       create: "新%{model}"
       update: "更新%{model}"
   links:
+    root: '主頁'
+    projects:
+      index: '專案'
     project:
+      new: '新專案'
       edit: '編輯專案'
       delete: '刪除專案'
   datetime:
