@@ -2,6 +2,11 @@
 
 <h2><%= @project.title %></h2>
 <p><%= @project.content %></p>
+<% if @project.due_date %>
+  <div>
+    Due date : <%= distance_of_time_in_words(Time.now, @project.due_date) %>
+  </div>
+<% end %>
 
 <%= link_to t('links.project.edit'), edit_project_path(@project),  class: 'btn btn-info'  %>
 <%= link_to t('links.project.delete'), project_path(@project), method: :delete, class: 'btn btn-danger' %>
