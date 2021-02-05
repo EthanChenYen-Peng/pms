@@ -1,8 +1,13 @@
+require 'pry'
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
 
   def index
-    @projects = Project.all
+    if params[:sort_by] == 'due_date'
+      @projects = Project.order(due_date: :asc)
+    else
+      @projects = Project.order(created_at: :desc)
+    end
   end
 
   def new

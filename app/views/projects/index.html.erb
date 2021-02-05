@@ -1,5 +1,23 @@
 <h1>Projects page</h1>
-
+<%= form_with url: projects_path do |f| %>
+  <div class="form-row justify-content-end" >
+    <div class="form-group col-md-3">
+      <%= f.select(:sort_by, 
+                   [['Due date', 'due_date'], ['Created at', 'created_at']],
+                   {},
+                   {class: 'custom-select', id: 'order-by-select-group'}) %>
+    </div>
+    <div class="form-group col-md-2">
+      <%= f.select(:order_direction, 
+                   [['Ascending', 'asc'], ['Descending', 'created_at']],
+                   {},
+                   {class: 'custom-select', id: 'order-by-select-group'}) %>
+    </div>
+    <div class="form-group col-md-1">
+      <%= f.submit 'Sort', class:'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>
 <div class="list-group">
   <%= @projects.each do |project| %>
     <%= link_to  project_path(project), class: "list-group-item list-group-item-action"  do  %>
@@ -10,7 +28,10 @@
         <small>Created at: <%= time_ago_in_words(project.created_at) %></small>
       </div>
       <p class="mb-1"><%= project.content %></p>
-      <small>And some small print.</small>
+      <div class='d-flex w-100 justify-content-between'>
+        <small>And some small print.</small>
+        <small>Due date: <%= time_ago_in_words(project.due_date) %></small>
+      </div>
     <% end %>
   <% end %>
 </div>
