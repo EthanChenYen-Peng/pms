@@ -6,6 +6,8 @@ class ProjectsController < ApplicationController
   FILEDS_TO_SORT_BY = ['created_at', 'due_date']
 
   def index
+    puts params
+    @selected_stauts = 'todo'
     @projects = Project.order(project_sort_by_params)
   end
 
