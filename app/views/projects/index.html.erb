@@ -1,17 +1,17 @@
 <h1>Projects page</h1>
-<%= form_with url: projects_path do |f| %>
+<%= form_with url: projects_path, method: :get , id: 'project-order-form' do |f| %>
   <div class="form-row justify-content-end" >
     <div class="form-group col-md-3">
       <%= f.select(:sort_by, 
                    [['Due date', 'due_date'], ['Created at', 'created_at']],
-                   {},
-                   {class: 'custom-select', id: 'order-by-select-group'}) %>
+                   {selected: @sort_by},
+                   {class: 'custom-select', id: 'sort_by'}) %>
     </div>
     <div class="form-group col-md-2">
       <%= f.select(:order_direction, 
-                   [['Ascending', 'asc'], ['Descending', 'created_at']],
-                   {},
-                   {class: 'custom-select', id: 'order-by-select-group'}) %>
+                   [['Ascending', 'asc'], ['Descending', 'desc']],
+                   {selected: @order_direction},
+                   {class: 'custom-select', id: 'order_direction'}) %>
     </div>
     <div class="form-group col-md-1">
       <%= f.submit 'Sort', class:'btn btn-primary' %>
