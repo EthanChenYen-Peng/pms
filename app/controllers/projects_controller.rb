@@ -1,8 +1,12 @@
+require 'pry'
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
 
+  ORDER_DIRECTIONS = ['desc', 'asc']
+  FILEDS_TO_SORT_BY = ['created_at', 'due_date']
+
   def index
-    @projects = Project.all
+    @projects = Project.order(project_sort_by_params)
   end
 
   def new
@@ -42,6 +46,15 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def project_sort_by_params
+    order_direction = ORDER_DIRECTIONS.include?(params[:order_direction]) ? params[:order_direction] : 'desc'
+    sort_by = FILEDS_TO_SORT_BY.include?(params[:sort_by]) ? params[:sort_by] : 'created_at'
+
+    @selected_order_direction = t(order_direction.to_sym)
+    @selected_sort_by = t(sort_by.to_sym)
+    Hash[sort_by, order_direction]
+  end
 
   def set_project
     @project = Project.find(params[:id])

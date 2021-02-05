@@ -49,3 +49,8 @@ en:
       new: 'New Project'
       edit: 'Edit Project'
       delete: 'Delete Project'
+  sort: 'Sort'
+  due_date: 'Due date'
+  created_at: 'Create at'
+  ascending: 'Ascending'
+  descending: 'Descending'
