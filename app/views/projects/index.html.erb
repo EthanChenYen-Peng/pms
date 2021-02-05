@@ -1,20 +1,21 @@
 <h1>Projects page</h1>
+<%= @selected_sort_by %>
 <%= form_with url: projects_path, method: :get , id: 'project-order-form' do |f| %>
   <div class="form-row justify-content-end" >
     <div class="form-group col-md-3">
       <%= f.select(:sort_by, 
-                   [['Due date', 'due_date'], ['Created at', 'created_at']],
-                   {selected: @sort_by},
+                   [[t('due_date'), 'due_date'], [t('created_at'), 'created_at']],
+                   {selected: @selected_sort_by},
                    {class: 'custom-select', id: 'sort_by'}) %>
     </div>
     <div class="form-group col-md-2">
       <%= f.select(:order_direction, 
-                   [['Ascending', 'asc'], ['Descending', 'desc']],
-                   {selected: @order_direction},
+                   [[t('ascending'), 'asc'], [t('descending'), 'desc']],
+                   {selected: @selected_order_direction},
                    {class: 'custom-select', id: 'order_direction'}) %>
     </div>
     <div class="form-group col-md-1">
-      <%= f.submit 'Sort', class:'btn btn-primary' %>
+      <%= f.submit t('sort'), class:'btn btn-primary' %>
     </div>
   </div>
 <% end %>
@@ -25,12 +26,12 @@
         <h5 class="mb-1 project-title">
           <%= project.title %>
         </h5>
-        <small>Created at: <%= time_ago_in_words(project.created_at) %></small>
+        <small> <%= t('created_at') %>: <%= time_ago_in_words(project.created_at) %></small>
       </div>
       <p class="mb-1"><%= project.content %></p>
       <div class='d-flex w-100 justify-content-between'>
         <small>And some small print.</small>
-        <small>Due date: <%= time_ago_in_words(project.due_date) %></small>
+        <small> <%= t('due_date') %> : <%= time_ago_in_words(project.due_date) %></small>
       </div>
     <% end %>
   <% end %>

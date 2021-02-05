@@ -11,7 +11,7 @@
     <%= f.text_area :content, class: "form-control #{'is-invalid' if project.errors[:content].any?}" %>
   </div>
   <div class='form-group'>
-    <label for='project_due_date'>Due date</label>
+    <%= f.label :due_date %>
     <input class='form-control' name='project[due_date]' id='project_due_date' />
   </div>
     <%= f.submit nil, class: 'btn btn-info' %>

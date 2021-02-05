@@ -48,9 +48,12 @@ class ProjectsController < ApplicationController
   private
 
   def project_sort_by_params
-    @order_direction = ORDER_DIRECTIONS.include?(params[:order_direction]) ? params[:order_direction] : 'desc'
-    @sort_by = FILEDS_TO_SORT_BY.include?(params[:sort_by]) ? params[:sort_by] : 'created_at'
-    Hash[@sort_by, @order_direction]
+    order_direction = ORDER_DIRECTIONS.include?(params[:order_direction]) ? params[:order_direction] : 'desc'
+    sort_by = FILEDS_TO_SORT_BY.include?(params[:sort_by]) ? params[:sort_by] : 'created_at'
+
+    @selected_order_direction = t(order_direction.to_sym)
+    @selected_sort_by = t(sort_by.to_sym)
+    Hash[sort_by, order_direction]
   end
 
   def set_project
