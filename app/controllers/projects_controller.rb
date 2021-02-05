@@ -6,8 +6,7 @@ class ProjectsController < ApplicationController
   FILEDS_TO_SORT_BY = ['created_at', 'due_date']
 
   def index
-    puts params
-    @selected_stauts = 'todo'
+
     @projects = Project.order(project_sort_by_params)
   end
 
@@ -56,6 +55,11 @@ class ProjectsController < ApplicationController
     @selected_order_direction = t(order_direction.to_sym)
     @selected_sort_by = t(sort_by.to_sym)
     Hash[sort_by, order_direction]
+  end
+
+  def project_filter_params
+    @search_terms = params[:search] || ''
+    @selected_status = params[:status] || 'all' 
   end
 
   def set_project
