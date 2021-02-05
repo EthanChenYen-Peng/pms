@@ -7,12 +7,14 @@ RSpec.feature 'Users can create project' do
 
       fill_in 'project[title]', with: 'write a blog'
       fill_in 'project[content]', with: 'blog content'
-
+      fill_in 'project[due_date]', with: Time.now + 2.days
+      
       click_button 'Create Project'
 
       expect(page).to have_content 'Project has been created.'
       expect(page).to have_content 'write a blog'
       expect(page).to have_content 'blog content'
+      expect(page).to have_content '2 days' 
     end
 
     scenario 'with invalid inputs' do
@@ -42,12 +44,14 @@ RSpec.feature 'Users can create project' do
 
       fill_in 'project[title]', with: 'write a blog'
       fill_in 'project[content]', with: 'blog content'
+      fill_in 'project[due_date]', with: Time.now + 2.days
 
       click_button '新專案'
 
       expect(page).to have_content '專案已創建'
       expect(page).to have_content 'write a blog'
       expect(page).to have_content 'blog content'
+      expect(page).to have_content '2 天' 
     end
 
     scenario 'with invalid inputs' do
