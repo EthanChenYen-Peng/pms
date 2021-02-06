@@ -4,18 +4,18 @@
   <div class="form-row mb-5">
     <div class="form-group col-md-6">
       <%= f.label t('title'), for: 'search_title' %>
-      <%= f.text_field :search, class: 'form-control', id: 'search_title' %>
+      <%= f.text_field :search, class: 'form-control', id: 'search_title', value: @search_terms %>
     </div>
     <div class="form-group col-md-4">
       <%= f.label t('status'), for: 'project_status' %>
       <%= f.select(:status, 
                    [
+                      ['All', 'all'],
                       [t('project.status.todo'), 'todo'], 
                       [t('project.status.doing'), 'doing'],
-                      [t('project.status.done'), 'done'],
-                      ['All', 'all']
+                      [t('project.status.done'), 'done']
                    ],
-                   {selected: @selected_stauts},
+                   {selected: @selected_status},
                    {class: 'custom-select', id: 'project_status'}) %>
     </div>
     <div class="form-group col-md-2">
@@ -23,9 +23,6 @@
       <%= f.submit t('search'), class:'btn btn-info form-control mt-2' %>
     </div>
   </div>
-<% end %>
-
-<%= form_with url: projects_path, method: :get , id: 'project-order-form' do |f| %>
   <div class="form-row justify-content-end" >
     <div class="form-group col-md-3">
       <%= f.select(:sort_by, 
@@ -44,6 +41,7 @@
     </div>
   </div>
 <% end %>
+
 <div class="list-group">
   <%= @projects.each do |project| %>
     <%= link_to  project_path(project), class: "list-group-item list-group-item-action"  do  %>

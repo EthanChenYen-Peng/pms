@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Projects are sorted' do
+RSpec.feature 'Projects can be sorted' do
   before do
     @projects = []
     10.times do
@@ -15,7 +15,7 @@ RSpec.feature 'Projects are sorted' do
     expect(displayed_project_titles).to eq(expected_project_titles)
   end
 
-  scenario 'sort by "due_date" field with "descending" order' do
+  scenario 'by "due_date" field with "descending" order' do
     visit projects_path
 
     select 'Due date', from: 'sort_by'
@@ -27,7 +27,7 @@ RSpec.feature 'Projects are sorted' do
     expect(displayed_project_titles).to eq(expected_project_titles)
   end
 
-  scenario 'sort by "due_date" field with "ascending" order' do
+  scenario 'by "due_date" field with "ascending" order' do
     visit projects_path
 
     select 'Due date', from: 'sort_by'
@@ -39,3 +39,5 @@ RSpec.feature 'Projects are sorted' do
     expect(displayed_project_titles).to eq(expected_project_titles)
   end
 end
+
+

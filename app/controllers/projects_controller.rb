@@ -1,13 +1,18 @@
-require 'pry'
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
 
   ORDER_DIRECTIONS = ['desc', 'asc']
   FILEDS_TO_SORT_BY = ['created_at', 'due_date']
+  PROJECT_STATUS = ['todo', 'doing', 'done' ]
 
   def index
-
-    @projects = Project.order(project_sort_by_params)
+    set_project_query_params
+    if @selected_status == 'all'
+      @projects = Project.all
+    else
+      @projects = Project.where(status: @selected_status)
+    end
+    @projects = @projects.title_contains(@search_terms).order(project_sort_by_params)
   end
 
   def new
@@ -48,18 +53,16 @@ class ProjectsController < ApplicationController
 
   private
 
-  def project_sort_by_params
-    order_direction = ORDER_DIRECTIONS.include?(params[:order_direction]) ? params[:order_direction] : 'desc'
-    sort_by = FILEDS_TO_SORT_BY.include?(params[:sort_by]) ? params[:sort_by] : 'created_at'
-
-    @selected_order_direction = t(order_direction.to_sym)
-    @selected_sort_by = t(sort_by.to_sym)
-    Hash[sort_by, order_direction]
-  end
-
-  def project_filter_params
+  def set_project_query_params
+    @selected_order_direction = ORDER_DIRECTIONS.include?(params[:order_direction]) ? params[:order_direction] : 'desc'
+    @selected_sort_by = FILEDS_TO_SORT_BY.include?(params[:sort_by]) ? params[:sort_by] : 'created_at'
+    @selected_status = PROJECT_STATUS.include?(params[:status]) ? params[:status] : 'all'
     @search_terms = params[:search] || ''
-    @selected_status = params[:status] || 'all' 
+  end
+ 
+  # TODO: Command an query in a function. Might not be a good idea.
+  def project_sort_by_params
+    Hash[@selected_sort_by, @selected_order_direction]
   end
 
   def set_project
