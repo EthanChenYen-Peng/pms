@@ -1,17 +1,17 @@
 require 'rails_helper'
 
 RSpec.feature 'Projects can be sorted' do
-  before do
-    @projects = []
-    10.times do
-      @projects << FactoryBot.create(:project)
-    end
+  before :each do
+    Project.delete_all
+    FactoryBot.create(:project, title: 'project 1', created_at: Date.today, due_date: Date.today + 1)
+    FactoryBot.create(:project, title: 'project 2', created_at: Date.today + 1, due_date: Date.today + 2)
+    FactoryBot.create(:project, title: 'project 3', created_at: Date.today - 1, due_date: Date.today)
   end
 
-  scenario 'by "created_at" field"' do
+  scenario 'by default with "created_at" field in "descending" order ' do
     visit projects_path
     displayed_project_titles = page.find_all('.project-title').map(&:text)
-    expected_project_titles = @projects.sort_by(&:created_at).reverse.map(&:title)
+    expected_project_titles = ['project 2', 'project 1', 'project 3']
     expect(displayed_project_titles).to eq(expected_project_titles)
   end
 
@@ -23,7 +23,7 @@ RSpec.feature 'Projects can be sorted' do
     click_button 'Sort'
 
     displayed_project_titles = page.find_all('.project-title').map(&:text)
-    expected_project_titles = @projects.sort_by(&:due_date).reverse.map(&:title)
+    expected_project_titles = ['project 2', 'project 1', 'project 3']
     expect(displayed_project_titles).to eq(expected_project_titles)
   end
 
@@ -35,9 +35,7 @@ RSpec.feature 'Projects can be sorted' do
     click_button 'Sort'
 
     displayed_project_titles = page.find_all('.project-title').map(&:text)
-    expected_project_titles = @projects.sort_by(&:due_date).map(&:title)
+    expected_project_titles = ['project 3', 'project 1', 'project 2']
     expect(displayed_project_titles).to eq(expected_project_titles)
   end
 end
-
-
