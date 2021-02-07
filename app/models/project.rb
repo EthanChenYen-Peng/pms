@@ -3,7 +3,18 @@ class Project < ApplicationRecord
   validates :content, presence: true
 
   enum status: %i[todo doing done]
+  enum priority: %i[low medium high]
 
   scope :title_contains,
         ->(pattern) { where('title ILIKE (?)', "%#{pattern}%") }
+
+  priorities.each do |level, value|
+    define_method "#{level}_priority?" do
+      send("#{level}?")
+    end
+
+    define_method "#{level}_priority!" do
+      send("#{level}!")
+    end
+  end
 end

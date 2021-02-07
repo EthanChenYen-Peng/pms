@@ -30,6 +30,20 @@ RSpec.describe Project do
     expect(project.status).to eq('done')
   end
 
+  it 'can change priority' do
+    project = Project.new(title: 'project1', content: 'content1')
+    expect(project.low_priority?).to eq(true)
+    expect(project.priority).to eq('low')
+
+    project.medium_priority!
+    expect(project.medium_priority?).to eq(true)
+    expect(project.priority).to eq('medium')
+
+    project.high_priority!
+    expect(project.high_priority?).to eq(true)
+    expect(project.priority).to eq('high')
+  end
+
   context '#title_contains' do
     before do
       Project.delete_all
