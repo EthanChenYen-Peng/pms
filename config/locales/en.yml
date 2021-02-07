@@ -30,6 +30,13 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    attributes:
+      project:
+        status:
+          todo: 'Todo'
+          doing: 'Doing'
+          done: 'Done'
   project:
     create:
       success: 'Project has been created.'
@@ -50,6 +57,9 @@ en:
       edit: 'Edit Project'
       delete: 'Delete Project'
   sort: 'Sort'
+  search: 'Search'
+  status: 'Status'
+  title: 'Title'
   due_date: 'Due date'
   created_at: 'Create at'
   ascending: 'Ascending'

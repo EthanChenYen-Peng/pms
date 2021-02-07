@@ -18,4 +18,15 @@ RSpec.describe Project do
     expect(project.errors.any?).to be(true)
     expect(project.errors[:title]).to match_array(['has already been taken'])
   end
+
+  it 'can change status' do
+    project = Project.new(title: 'project1', content: 'content1')
+    project.doing!
+    expect(project.doing?).to eq(true)
+    expect(project.status).to eq('doing')
+
+    project.done!
+    expect(project.done?).to eq(true)
+    expect(project.status).to eq('done')
+  end
 end
