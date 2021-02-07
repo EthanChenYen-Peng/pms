@@ -29,4 +29,28 @@ RSpec.describe Project do
     expect(project.done?).to eq(true)
     expect(project.status).to eq('done')
   end
+
+  context '#title_contains' do
+    before do
+      Project.delete_all
+      names = ['Dr. Bradly Monahan', 'Rep. Gertrudis Schaefer', 'Zachary Nader', 'Efrain Gulgowski PhD', 'Jaime Stehr',
+               'Man Mayert', 'Williemae Denesik', 'Will Beer', 'Cecil Williamson', 'Jerrod Howell', 'Jefferson Murphy', 'Luigi Wolf', 'Vernon Pouros', 'Grover Considine', 'Jimmie Wilkinson']
+
+      names.each do |name|
+        FactoryBot.create(:project, title: name)
+      end
+    end
+
+    scenario 'search with lowercase' do
+      expected_project_titles = ['Cecil Williamson', 'Jimmie Wilkinson', 'Will Beer', 'Williemae Denesik']
+      actual_project_titles = Project.title_contains('wil').map(&:title)
+      expect(actual_project_titles).to match_array(expected_project_titles)
+    end
+
+    scenario 'search with uppercase' do
+      expected_project_titles = ['Cecil Williamson', 'Jimmie Wilkinson', 'Will Beer', 'Williemae Denesik']
+      actual_project_titles = Project.title_contains('WIL').map(&:title)
+      expect(actual_project_titles).to match_array(expected_project_titles)
+    end
+  end
 end
