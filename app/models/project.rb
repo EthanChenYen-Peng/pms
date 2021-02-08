@@ -2,6 +2,8 @@ class Project < ApplicationRecord
   validates :title, presence: true, uniqueness: true
   validates :content, presence: true
 
+  belongs_to :user
+
   enum status: %i[todo doing done]
   enum priority: %i[low medium high]
 
