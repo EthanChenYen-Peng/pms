@@ -56,6 +56,8 @@ en:
       new: 'New Project'
       edit: 'Edit Project'
       delete: 'Delete Project'
+    users:
+      new: 'Sign Up'
   sort: 'Sort'
   search: 'Search'
   status: 'Status'

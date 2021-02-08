@@ -43,6 +43,8 @@ zh-TW:
       new: '新專案'
       edit: '編輯專案'
       delete: '刪除專案'
+    users:
+      new: '註冊'
   datetime:
     distance_in_words:
       about_x_hours: "%{count} 小時前"
