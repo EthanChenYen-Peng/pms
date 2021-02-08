@@ -28,9 +28,9 @@
     <div class="form-group col-md-3">
       <%= f.select(:sort_by, 
                    [
-                    [t('due_date'), 'due_date'], 
-                    [t('created_at'), 'created_at'],
-                    [t('priority'), 'priority'],
+                     [t('due_date'), 'due_date'], 
+                     [t('created_at'), 'created_at'],
+                     [t('priority'), 'priority'],
                    ],
                    {selected: @selected_sort_by},
                    {class: 'custom-select', id: 'sort_by'}) %>
@@ -47,7 +47,6 @@
   </div>
 <% end %>
 
-<%= paginate @projects %>
 <div class="list-group">
   <% @projects.each do |project| %>
     <%= link_to  project_path(project), class: "list-group-item list-group-item-action"  do  %>
@@ -60,8 +59,14 @@
       <p class="mb-1"><%= project.content %></p>
       <div class='d-flex w-100 justify-content-between'>
         <small>And some small print.</small>
-        <small> <%= t('due_date') %> : <%= time_ago_in_words(project.due_date) %></small>
+        <% if project.due_date %>
+          <small> <%= t('due_date') %> : <%= time_ago_in_words(project.due_date) %></small>
+        <% end %>
       </div>
     <% end %>
   <% end %>
+</div>
+
+<div class="my-3">
+  <%= paginate @projects %>
 </div>
