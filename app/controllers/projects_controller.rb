@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
 
   ORDER_DIRECTIONS = ['desc', 'asc']
-  FILEDS_TO_SORT_BY = ['created_at', 'due_date']
+  FILEDS_TO_SORT_BY = ['created_at', 'due_date', 'priority']
   PROJECT_STATUS = ['todo', 'doing', 'done' ]
 
   def index
