@@ -8,6 +8,9 @@ class Project < ApplicationRecord
   scope :title_contains,
         ->(pattern) { where('title ILIKE (?)', "%#{pattern}%") }
 
+
+  paginates_per 15
+
   priorities.each do |level, value|
     define_method "#{level}_priority?" do
       send("#{level}?")
