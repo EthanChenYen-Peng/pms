@@ -49,7 +49,7 @@
 
 <%= paginate @projects %>
 <div class="list-group">
-  <%= @projects.each do |project| %>
+  <% @projects.each do |project| %>
     <%= link_to  project_path(project), class: "list-group-item list-group-item-action"  do  %>
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1 project-title">
