@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
     else
       @projects = Project.where(status: @selected_status)
     end
-    @projects = @projects.title_contains(@search_terms).order(project_sort_by_params)
+    @projects = @projects.title_contains(@search_terms).order(project_sort_by_params).page(params[:page])
   end
 
   def new

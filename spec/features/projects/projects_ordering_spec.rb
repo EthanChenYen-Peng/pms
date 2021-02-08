@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.feature 'Projects can be sorted' do
   before :each do
-    Project.delete_all
     FactoryBot.create(:project, title: 'project 1', created_at: Date.today, due_date: Date.today + 1, priority: 'high')
     FactoryBot.create(:project, title: 'project 2', created_at: Date.today + 1, due_date: Date.today + 2,
                                 priority: 'medium')

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Projects can searched and filetered' do
+RSpec.feature 'Projects can be searched and filetered' do
   before :each do
     Project.delete_all
     names = ['Dr. Bradly Monahan', 'Rep. Gertrudis Schaefer', 'Zachary Nader', 'Efrain Gulgowski PhD', 'Jaime Stehr',
