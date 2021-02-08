@@ -61,6 +61,7 @@ en:
   status: 'Status'
   title: 'Title'
   due_date: 'Due date'
-  created_at: 'Create at'
+  created_at: 'Created at'
   ascending: 'Ascending'
   descending: 'Descending'
+  priority: 'Priority'

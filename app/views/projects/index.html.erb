@@ -10,10 +10,10 @@
       <%= f.label t('status'), for: 'project_status' %>
       <%= f.select(:status, 
                    [
-                      ['All', 'all'],
-                      [t('project.status.todo'), 'todo'], 
-                      [t('project.status.doing'), 'doing'],
-                      [t('project.status.done'), 'done']
+                     ['All', 'all'],
+                     [t('project.status.todo'), 'todo'], 
+                     [t('project.status.doing'), 'doing'],
+                     [t('project.status.done'), 'done']
                    ],
                    {selected: @selected_status},
                    {class: 'custom-select', id: 'project_status'}) %>
@@ -23,10 +23,15 @@
       <%= f.submit t('search'), class:'btn btn-info form-control mt-2' %>
     </div>
   </div>
+
   <div class="form-row justify-content-end" >
     <div class="form-group col-md-3">
       <%= f.select(:sort_by, 
-                   [[t('due_date'), 'due_date'], [t('created_at'), 'created_at']],
+                   [
+                    [t('due_date'), 'due_date'], 
+                    [t('created_at'), 'created_at'],
+                    [t('priority'), 'priority'],
+                   ],
                    {selected: @selected_sort_by},
                    {class: 'custom-select', id: 'sort_by'}) %>
     </div>
