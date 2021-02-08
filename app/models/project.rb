@@ -9,7 +9,7 @@ class Project < ApplicationRecord
         ->(pattern) { where('title ILIKE (?)', "%#{pattern}%") }
 
 
-  paginates_per 15
+  paginates_per 10
 
   priorities.each do |level, value|
     define_method "#{level}_priority?" do
