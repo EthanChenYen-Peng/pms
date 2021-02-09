@@ -22,11 +22,25 @@
       <li class="nav-item">
         <%= link_to t('links.project.new'), new_project_path, class: 'nav-link' %>
       </li>
-   </ul>
+    </ul>
     <ul class="navbar-nav justify-content-end">
-      <li class="nav-item">
-        <%= link_to t('links.users.new'), signup_path, class: 'nav-link' %>
-      </li>
+      <% if login? %>
+        <li class="nav-item">
+          <span class='nav-link'>
+            Hello: <%= current_user.username %>
+          </span>
+        </li>
+        <li class="nav-item">
+          <%= link_to t('links.sessions.destroy'), logout_path, method: :delete ,class: 'nav-link' %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to t('links.users.new'), signup_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t('links.sessions.new'), login_path, class: 'nav-link' %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </nav>

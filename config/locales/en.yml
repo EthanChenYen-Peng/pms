@@ -58,6 +58,13 @@ en:
     delete:
       success: 'Account has been deleted.'
       failure: 'Account has not been deleted.'
+  session:
+    create:
+      success: 'Login successfully'
+      failure: 'Invalid credentials'
+    delete:
+      success: 'Logout successfully'
+      failure: 'Logout unsuccessful'
   links:
     root: 'Home'
     projects:
@@ -68,6 +75,9 @@ en:
       delete: 'Delete Project'
     users:
       new: 'Sign Up'
+    sessions:
+      new: 'Login'
+      destroy: 'Logout'
   sort: 'Sort'
   search: 'Search'
   status: 'Status'

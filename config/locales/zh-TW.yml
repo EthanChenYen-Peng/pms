@@ -22,7 +22,14 @@ zh-TW:
       failure: '帳戶更新失敗'
     delete:
       success: '帳戶已刪除'
-      failure: '帳戶失刪除敗'
+      failure: '帳戶刪除失敗'
+  session:
+    create:
+      success: '登入成功'
+      failure: '密碼或用戶名不正確'
+    delete:
+      success: '登出成功'
+      failure: '登出失敗'
   activerecord:
     models:
       project:
@@ -72,6 +79,9 @@ zh-TW:
       delete: '刪除專案'
     users:
       new: '註冊'
+    sessions:
+      new: '登入'
+      destroy: '登出'
   datetime:
     distance_in_words:
       about_x_hours: "%{count} 小時前"
