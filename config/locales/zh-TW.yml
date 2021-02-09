@@ -13,6 +13,16 @@ zh-TW:
     delete:
       success: '專案已刪除'
       failure: '專案失刪除敗'
+  user:
+    create:
+      success: '帳戶已創建'
+      failure: '帳戶創建失敗'
+    update:
+      success: '帳戶已更新'
+      failure: '帳戶更新失敗'
+    delete:
+      success: '帳戶已刪除'
+      failure: '帳戶失刪除敗'
   activerecord:
     models:
       project:
@@ -22,8 +32,25 @@ zh-TW:
         title: '標題'
         content: '內容'
         due_date: '結束日期'
+      user:
+        username: '用戶名'
+        email: 'Email'
+        password: '密碼'
+        password_confirmation: '確認密碼'
     errors:
       models:
+        user:
+          attributes:
+            password_confirmation:
+              confirmation: '密碼不匹配'
+            username: 
+              blank: '用戶名不能為空'
+              taken: '用戶名已經存在'
+            email: 
+              blank: 'Email 不能為空'
+              taken: 'Email 經存在'
+            password: 
+              blank: '密碼不能為空'
         project:
           attributes:
             title: 
@@ -62,4 +89,4 @@ zh-TW:
   due_date: '結束日期'
   ascending: '升序'
   descending: '降序'
-
+  signup: '註冊'
