@@ -47,7 +47,8 @@ en:
     delete:
       success: 'Project has been deleted.'
       failure: 'Project has not been deleted.'
-
+    access:
+      unauthorized: 'You can only edit or delete your own article'
   user:
     create:
       success: 'Account has been created.'

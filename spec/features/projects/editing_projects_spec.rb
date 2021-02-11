@@ -1,9 +1,36 @@
 require 'rails_helper'
 
 RSpec.feature 'Users can edit projects' do
+  let(:user) { FactoryBot.create(:user) }
+
   context 'locale: en' do
-    scenario 'with valid inputs' do
+    scenario 'get redirected to login path' do
       project = FactoryBot.create(:project)
+      visit edit_project_path(locale: :en, id: project.id)
+
+      expect(page).to have_content 'You need to login first.'
+    end
+
+    scenario "cannot see link to edit other user's project" do
+      login_as(user)
+      project = FactoryBot.create(:project)
+      visit projects_path
+
+      click_link project.title
+      expect(page).to_not have_content 'Edit Project'
+    end
+
+    scenario "cannot reach page to edit other user's project" do
+      login_as(user)
+      project = FactoryBot.create(:project)
+      visit edit_project_path(locale: :en, id: project.id)
+
+      expect(page).to have_content 'You can only edit or delete your own article'
+    end
+
+    scenario 'with valid inputs' do
+      login_as(user)
+      project = FactoryBot.create(:project, user: user)
       visit projects_path
 
       click_link project.title
@@ -20,7 +47,8 @@ RSpec.feature 'Users can edit projects' do
     end
 
     scenario 'with invalid inputs' do
-      project = FactoryBot.create(:project)
+      login_as(user)
+      project = FactoryBot.create(:project, user: user)
       visit projects_path
 
       click_link project.title
@@ -37,8 +65,32 @@ RSpec.feature 'Users can edit projects' do
   end
 
   context 'locale: zh-TW' do
-    scenario 'with valid inputs' do
+    scenario 'get redirected to login path' do
+      visit new_project_path(locale: 'zh-TW')
+
+      expect(page).to have_content '您需要先登錄'
+    end
+
+    scenario "cannot see link to edit other user's project" do
+      login_as(user)
       project = FactoryBot.create(:project)
+      visit projects_path(locale: 'zh-TW')
+
+      click_link project.title
+      expect(page).to_not have_content '編輯專案'
+    end
+
+    scenario "cannot reach page to edit other user's project" do
+      login_as(user)
+      project = FactoryBot.create(:project)
+      visit edit_project_path(locale: 'zh-TW', id: project.id)
+
+      expect(page).to have_content '您只能編輯或刪除自己的文章'
+    end
+
+    scenario 'with valid inputs' do
+      login_as(user)
+      project = FactoryBot.create(:project, user: user)
       visit projects_path(locale: 'zh-TW')
 
       click_link project.title
@@ -55,7 +107,8 @@ RSpec.feature 'Users can edit projects' do
     end
 
     scenario 'with invalid inputs' do
-      project = FactoryBot.create(:project)
+      login_as(user)
+      project = FactoryBot.create(:project, user: user)
       visit projects_path(locale: 'zh-TW')
 
       click_link project.title

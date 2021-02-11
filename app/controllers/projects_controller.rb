@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
-  before_action :require_user, only: %i[new create]
   before_action :set_project, only: %i[show edit update destroy]
+  before_action :require_user, except: %i[index show]
+  before_action :require_the_same_user, only: %i[edit update]
 
   ORDER_DIRECTIONS = ['desc', 'asc']
   FILEDS_TO_SORT_BY = ['created_at', 'due_date', 'priority']
@@ -72,5 +73,12 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:title, :content, :due_date)
+  end
+
+  def require_the_same_user
+    if current_user != @project.user
+      flash[:alert] = t('project.access.unauthorized')
+      redirect_to projects_path
+    end
   end
 end

@@ -13,6 +13,8 @@ zh-TW:
     delete:
       success: '專案已刪除'
       failure: '專案失刪除敗'
+    access:
+      unauthorized: '您只能編輯或刪除自己的文章'
   user:
     create:
       success: '帳戶已創建'
