@@ -1,23 +1,33 @@
 require 'rails_helper'
 
 RSpec.feature 'Users can create project' do
+  let(:user) { FactoryBot.create(:user) }
+
   context 'locale: en' do
+    scenario 'get redirected to login path' do
+      visit new_project_path
+
+      expect(page).to have_content 'You need to login first.'
+    end
+
     scenario 'with valid inputs' do
+      login_as(user)
       visit new_project_path
 
       fill_in 'project[title]', with: 'write a blog'
       fill_in 'project[content]', with: 'blog content'
       fill_in 'project[due_date]', with: Time.now + 2.days
-      
+
       click_button 'Create Project'
 
       expect(page).to have_content 'Project has been created.'
       expect(page).to have_content 'write a blog'
       expect(page).to have_content 'blog content'
-      expect(page).to have_content '2 days' 
+      expect(page).to have_content '2 days'
     end
 
     scenario 'with invalid inputs' do
+      login_as(user)
       visit new_project_path
       click_button 'Create Project'
 
@@ -27,6 +37,7 @@ RSpec.feature 'Users can create project' do
     end
 
     scenario 'with duplicate title' do
+      login_as(user)
       FactoryBot.create(:project, title: 'project1')
       visit new_project_path
       fill_in 'project[title]', with: 'project1'
@@ -39,7 +50,13 @@ RSpec.feature 'Users can create project' do
   end
 
   context 'locale: zh-TW' do
+    scenario 'get redirected to login path' do
+      visit new_project_path(locale: 'zh-TW')
+
+      expect(page).to have_content '您需要先登錄'
+    end
     scenario 'with valid inputs' do
+      login_as(user)
       visit new_project_path(locale: 'zh-TW')
 
       fill_in 'project[title]', with: 'write a blog'
@@ -51,10 +68,11 @@ RSpec.feature 'Users can create project' do
       expect(page).to have_content '專案已創建'
       expect(page).to have_content 'write a blog'
       expect(page).to have_content 'blog content'
-      expect(page).to have_content '2 天' 
+      expect(page).to have_content '2 天'
     end
 
     scenario 'with invalid inputs' do
+      login_as(user)
       visit new_project_path(locale: 'zh-TW')
       click_button '新專案'
 
@@ -64,6 +82,7 @@ RSpec.feature 'Users can create project' do
     end
 
     scenario 'with duplicate title' do
+      login_as(user)
       FactoryBot.create(:project, title: 'project1')
       visit new_project_path(locale: 'zh-TW')
       fill_in 'project[title]', with: 'project1'

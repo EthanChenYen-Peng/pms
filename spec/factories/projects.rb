@@ -6,5 +6,6 @@ FactoryBot.define do
     start_date { Faker::Time.between_dates(from: Date.today - 5, to: Date.today - 2) }
     due_date { Faker::Time.between_dates(from: Date.today, to: Date.today + 10) }
     status { Project.statuses.values.sample }
+    association :user
   end
 end

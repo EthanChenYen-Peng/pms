@@ -88,3 +88,4 @@ en:
   descending: 'Descending'
   priority: 'Priority'
   signup: 'Sign up'
+  require_login: 'You need to login first.'

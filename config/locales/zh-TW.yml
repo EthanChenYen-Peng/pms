@@ -100,3 +100,4 @@ zh-TW:
   ascending: '升序'
   descending: '降序'
   signup: '註冊'
+  require_login: '您需要先登錄'

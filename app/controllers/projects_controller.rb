@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_action :require_user, only: %i[new create]
   before_action :set_project, only: %i[show edit update destroy]
 
   ORDER_DIRECTIONS = ['desc', 'asc']
@@ -16,11 +17,11 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = Project.new
+    @project = current_user.projects.new
   end
 
   def create
-    @project = Project.new(project_params)
+    @project = current_user.projects.new(project_params)
 
     if @project.save
       flash[:notice] = t('project.create.success')
