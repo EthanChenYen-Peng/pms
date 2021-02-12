@@ -18,14 +18,6 @@ RSpec.feature 'Users can delete projects' do
       expect(page).to_not have_content project.content
     end
 
-    scenario "cannot see button to delete other user's project" do
-      login_as(user)
-      project = FactoryBot.create(:project)
-      visit projects_path
-
-      click_link project.title
-      expect(page).to_not have_content 'Delete Project'
-    end
   end
 
   context 'locale: zh-TW' do
@@ -43,13 +35,5 @@ RSpec.feature 'Users can delete projects' do
       expect(page).to_not have_content project.content
     end
 
-    scenario "cannot see button to delete other user's project" do
-      login_as(user)
-      project = FactoryBot.create(:project)
-      visit projects_path(locale: 'zh-TW')
-
-      click_link project.title
-      expect(page).to_not have_content '刪除專案'
-    end
   end
 end

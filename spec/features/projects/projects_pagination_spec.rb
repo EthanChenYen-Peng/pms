@@ -1,11 +1,16 @@
 require 'rails_helper'
 
-RSpec.describe 'User sees all projects' do
+RSpec.describe 'When users see their projects' do
   before do
-    login_as(FactoryBot.create(:user))
+
+    user = FactoryBot.create(:user)
+    login_as(user)
+
+    30.times do
+      FactoryBot.create(:project, user: user)
+    end
   end
   scenario 'they can click the next page to see next 10 projects' do
-    FactoryBot.create_list(:project, 30)
     projects = Project.all.order(created_at: :desc)
 
     visit projects_path
@@ -19,7 +24,6 @@ RSpec.describe 'User sees all projects' do
   end
 
   scenario 'they can click the 3rd page to see projects in 20th-30th ' do
-    FactoryBot.create_list(:project, 30)
     projects = Project.all.order(created_at: :desc)
 
     visit projects_path

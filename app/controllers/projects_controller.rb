@@ -10,9 +10,9 @@ class ProjectsController < ApplicationController
   def index
     set_project_query_params
     if @selected_status == 'all'
-      @projects = Project.all
+      @projects = current_user.projects.all
     else
-      @projects = Project.where(status: @selected_status)
+      @projects = current_user.projects.where(status: @selected_status)
     end
     @projects = @projects.title_contains(@search_terms).order(project_sort_by_params).page(params[:page])
   end

@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
 
   def require_user
     unless login?
-      flash[:alert] = 'You need to login first.'
       flash[:alert] = t('require_login')
       redirect_to login_path
     end

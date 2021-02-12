@@ -11,15 +11,6 @@ RSpec.feature 'Users can edit projects' do
       expect(page).to have_content 'You need to login first.'
     end
 
-    scenario "cannot see link to edit other user's project" do
-      login_as(user)
-      project = FactoryBot.create(:project)
-      visit projects_path
-
-      click_link project.title
-      expect(page).to_not have_content 'Edit Project'
-    end
-
     scenario "cannot reach page to edit other user's project" do
       login_as(user)
       project = FactoryBot.create(:project)
@@ -69,15 +60,6 @@ RSpec.feature 'Users can edit projects' do
       visit new_project_path(locale: 'zh-TW')
 
       expect(page).to have_content '您需要先登錄'
-    end
-
-    scenario "cannot see link to edit other user's project" do
-      login_as(user)
-      project = FactoryBot.create(:project)
-      visit projects_path(locale: 'zh-TW')
-
-      click_link project.title
-      expect(page).to_not have_content '編輯專案'
     end
 
     scenario "cannot reach page to edit other user's project" do

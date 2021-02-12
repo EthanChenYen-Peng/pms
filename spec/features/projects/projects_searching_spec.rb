@@ -2,15 +2,14 @@ require 'rails_helper'
 
 RSpec.feature 'Projects can be searched and filetered' do
   before :each do
-    Project.delete_all
     names = ['Dr. Bradly Monahan', 'Rep. Gertrudis Schaefer', 'Zachary Nader', 'Efrain Gulgowski PhD', 'Jaime Stehr',
              'Man Mayert', 'Williemae Denesik', 'Will Beer', 'Cecil Williamson', 'Jerrod Howell', 'Jefferson Murphy', 'Luigi Wolf', 'Vernon Pouros', 'Grover Considine', 'Jimmie Wilkinson']
-
+    user = FactoryBot.create(:user)
+    login_as(user)
     names.each do |name|
-      FactoryBot.create(:project, title: name)
+      FactoryBot.create(:project, title: name, user: user)
     end
 
-    login_as(FactoryBot.create(:user))
   end
   scenario 'search with only lowercase' do
     visit projects_path
