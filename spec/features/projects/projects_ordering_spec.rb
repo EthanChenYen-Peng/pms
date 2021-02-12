@@ -6,6 +6,8 @@ RSpec.feature 'Projects can be sorted' do
     FactoryBot.create(:project, title: 'project 2', created_at: Date.today + 1, due_date: Date.today + 2,
                                 priority: 'medium')
     FactoryBot.create(:project, title: 'project 3', created_at: Date.today - 1, due_date: Date.today, priority: 'low')
+
+    login_as(FactoryBot.create(:user))
   end
 
   scenario 'by default with "created_at" field in "descending" order ' do

@@ -9,6 +9,8 @@ RSpec.feature 'Projects can be searched and filetered' do
     names.each do |name|
       FactoryBot.create(:project, title: name)
     end
+
+    login_as(FactoryBot.create(:user))
   end
   scenario 'search with only lowercase' do
     visit projects_path

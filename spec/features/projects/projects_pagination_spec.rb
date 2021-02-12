@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'User sees all projects' do
+  before do
+    login_as(FactoryBot.create(:user))
+  end
   scenario 'they can click the next page to see next 10 projects' do
     FactoryBot.create_list(:project, 30)
     projects = Project.all.order(created_at: :desc)
