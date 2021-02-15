@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
+  before_action :require_user
+  before_action :require_the_same_user, only: %i[edit update destroy]
 
   ORDER_DIRECTIONS = ['desc', 'asc']
   FILEDS_TO_SORT_BY = ['created_at', 'due_date', 'priority']
@@ -8,19 +10,19 @@ class ProjectsController < ApplicationController
   def index
     set_project_query_params
     if @selected_status == 'all'
-      @projects = Project.all
+      @projects = current_user.projects.all
     else
-      @projects = Project.where(status: @selected_status)
+      @projects = current_user.projects.where(status: @selected_status)
     end
     @projects = @projects.title_contains(@search_terms).order(project_sort_by_params).page(params[:page])
   end
 
   def new
-    @project = Project.new
+    @project = current_user.projects.new
   end
 
   def create
-    @project = Project.new(project_params)
+    @project = current_user.projects.new(project_params)
 
     if @project.save
       flash[:notice] = t('project.create.success')
@@ -71,5 +73,12 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:title, :content, :due_date)
+  end
+
+  def require_the_same_user
+    if current_user != @project.user
+      flash[:alert] = t('project.access.unauthorized')
+      redirect_to projects_path
+    end
   end
 end

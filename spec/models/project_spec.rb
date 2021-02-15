@@ -20,7 +20,7 @@ RSpec.describe Project do
   end
 
   it 'can change status' do
-    project = Project.new(title: 'project1', content: 'content1')
+    project = FactoryBot.create(:project, title: 'project1', content: 'content1')
     project.doing!
     expect(project.doing?).to eq(true)
     expect(project.status).to eq('doing')
@@ -31,7 +31,7 @@ RSpec.describe Project do
   end
 
   it 'can change priority' do
-    project = Project.new(title: 'project1', content: 'content1')
+    project = FactoryBot.create(:project, title: 'project1', content: 'content1')
     expect(project.low_priority?).to eq(true)
     expect(project.priority).to eq('low')
 

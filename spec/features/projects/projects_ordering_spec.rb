@@ -2,10 +2,14 @@ require 'rails_helper'
 
 RSpec.feature 'Projects can be sorted' do
   before :each do
-    FactoryBot.create(:project, title: 'project 1', created_at: Date.today, due_date: Date.today + 1, priority: 'high')
+    user = FactoryBot.create(:user)
+    login_as(user)
+    FactoryBot.create(:project, title: 'project 1', created_at: Date.today, due_date: Date.today + 1,
+                                priority: 'high', user: user)
     FactoryBot.create(:project, title: 'project 2', created_at: Date.today + 1, due_date: Date.today + 2,
-                                priority: 'medium')
-    FactoryBot.create(:project, title: 'project 3', created_at: Date.today - 1, due_date: Date.today, priority: 'low')
+                                priority: 'medium', user: user)
+    FactoryBot.create(:project, title: 'project 3', created_at: Date.today - 1, due_date: Date.today, priority: 'low',
+                                user: user)
   end
 
   scenario 'by default with "created_at" field in "descending" order ' do

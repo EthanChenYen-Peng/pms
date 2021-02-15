@@ -47,7 +47,25 @@ en:
     delete:
       success: 'Project has been deleted.'
       failure: 'Project has not been deleted.'
-
+    access:
+      unauthorized: 'You can only edit or delete your own article'
+  user:
+    create:
+      success: 'Account has been created.'
+      failure: 'Account has not been created.'
+    update:
+      success: 'Account has been updated.'
+      failure: 'Account has not been updated.'
+    delete:
+      success: 'Account has been deleted.'
+      failure: 'Account has not been deleted.'
+  session:
+    create:
+      success: 'Login successfully'
+      failure: 'Invalid credentials'
+    delete:
+      success: 'Logout successfully'
+      failure: 'Logout unsuccessful'
   links:
     root: 'Home'
     projects:
@@ -56,6 +74,11 @@ en:
       new: 'New Project'
       edit: 'Edit Project'
       delete: 'Delete Project'
+    users:
+      new: 'Sign Up'
+    sessions:
+      new: 'Login'
+      destroy: 'Logout'
   sort: 'Sort'
   search: 'Search'
   status: 'Status'
@@ -65,3 +88,5 @@ en:
   ascending: 'Ascending'
   descending: 'Descending'
   priority: 'Priority'
+  signup: 'Sign up'
+  require_login: 'You need to login first.'

@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.feature 'Users can delete projects' do
-  let!(:project) { FactoryBot.create(:project) }
+  let(:user) { FactoryBot.create(:user) }
 
-  # TODO: User should only be able to delete her own project.
   context 'locale: en' do
     scenario 'successfully deleting a project' do
+      login_as(user)
+      project = FactoryBot.create(:project, user: user)
       visit projects_path
 
       click_link project.title
@@ -16,10 +17,13 @@ RSpec.feature 'Users can delete projects' do
       expect(page).to_not have_content project.title
       expect(page).to_not have_content project.content
     end
+
   end
 
   context 'locale: zh-TW' do
     scenario 'successfully deleting a project' do
+      login_as(user)
+      project = FactoryBot.create(:project, user: user)
       visit projects_path(locale: 'zh-TW')
 
       click_link project.title
@@ -30,5 +34,6 @@ RSpec.feature 'Users can delete projects' do
       expect(page).to_not have_content project.title
       expect(page).to_not have_content project.content
     end
+
   end
 end
