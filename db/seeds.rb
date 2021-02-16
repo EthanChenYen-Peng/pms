@@ -7,3 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create(username: 'ethanchen', email: 'ethan@gmail.com', password: 'asdfasdf') unless User.any?
+
+10.times do 
+  user = FactoryBot.create(:user)
+
+  10.times do
+    FactoryBot.create(:project, user: user)
+  end
+end

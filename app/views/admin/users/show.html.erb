@@ -1,0 +1,35 @@
+<div class="mt-5">
+  <div class='d-flex justify-content-between'>
+    <div>
+      <h2><%= @user.username %></h2> 
+      <h5><%= @user.email %></h5>
+    </div>
+    <div>
+      <%= link_to "Edit", edit_admin_user_path(@user), class: 'btn btn-success' %> 
+      <%= link_to "Delete", admin_user_path(@user), method: :delete,  class: 'btn btn-danger' %> 
+    </div>
+  </div>
+
+
+  <div class="list-group">
+    <% @user.projects.each do |project| %>
+      <%= link_to  project_path(project), class: "list-group-item list-group-item-action"  do  %>
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1 project-title">
+            <%= project.title %>
+          </h5>
+          <small> <%= t('created_at') %>: <%= time_ago_in_words(project.created_at) %></small>
+        </div>
+        <p class="mb-1"><%= project.content %></p>
+        <div class='d-flex w-100 justify-content-between'>
+          <small>And some small print.</small>
+          <% if project.due_date %>
+            <small> <%= t('due_date') %> : <%= time_ago_in_words(project.due_date) %></small>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+
+</div>
