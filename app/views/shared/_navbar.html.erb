@@ -25,6 +25,11 @@
     </ul>
     <ul class="navbar-nav justify-content-end">
       <% if login? %>
+        <% if current_user.admin? %>
+          <li class="nav-item">
+            <%= link_to t('links.admin'), admin_root_path, class: 'nav-link' %>
+          </li>
+        <% end %>
         <li class="nav-item">
           <span class='nav-link'>
             Hello: <%= current_user.username %>

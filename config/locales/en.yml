@@ -67,6 +67,7 @@ en:
       success: 'Logout successfully'
       failure: 'Logout unsuccessful'
   links:
+    admin: 'Admin'
     root: 'Home'
     projects:
       index: 'Projects'
