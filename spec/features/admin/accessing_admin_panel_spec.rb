@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe 'Accessing admin panel' do
   context 'As an admin' do
     scenario 'I can access admin panel once I login' do
-      user = FactoryBot.create(:user, admin: true)
+      admin = FactoryBot.create(:user, admin: true)
+      login_as(admin)
 
-      login_as(user)
       click_on 'Admin'
 
       expect(page).to have_content('Welcome to the admin panel')
@@ -15,9 +15,41 @@ RSpec.describe 'Accessing admin panel' do
   context 'As a regular user' do
     scenario 'I cannot see "Admin" button even after I login' do
       user = FactoryBot.create(:user)
-
       login_as(user)
+
       expect(page).to_not have_content('Admin')
+    end
+
+    scenario 'I cannot access admin panel' do
+      user = FactoryBot.create(:user)
+      login_as(user)
+
+      visit admin_root_path
+
+      expect(page).to have_content('You are not authorized to access this page.')
+      expect(current_path).to eq(root_path)
+    end
+
+    scenario "I cannot access the page to edit other user's info" do
+      user_one = FactoryBot.create(:user)
+      user_two = FactoryBot.create(:user)
+      login_as(user_one)
+
+      visit edit_admin_user_path(locale: :en, id: user_two.id)
+
+      expect(page).to have_content('You are not authorized to access this page.')
+      expect(current_path).to eq(root_path)
+    end
+
+    scenario "I cannot view other user's page " do
+      user_one = FactoryBot.create(:user)
+      user_two = FactoryBot.create(:user)
+      login_as(user_one)
+
+      visit admin_user_path(locale: :en, id: user_two.id)
+
+      expect(page).to have_content('You are not authorized to access this page.')
+      expect(current_path).to eq(root_path)
     end
   end
 end

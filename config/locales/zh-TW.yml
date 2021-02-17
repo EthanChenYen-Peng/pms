@@ -104,3 +104,4 @@ zh-TW:
   descending: '降序'
   signup: '註冊'
   require_login: '您需要先登錄'
+  unauthorized_access: '您無權訪問此頁面'
