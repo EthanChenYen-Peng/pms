@@ -6,12 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(username: 'ethanchen', email: 'ethan@gmail.com', password: 'asdfasdf') unless User.any?
+unless User.any?
+  User.create(username: 'ethanchen', email: 'ethan@gmail.com', password: 'asdfasdf', admin: true)
 
-10.times do 
-  user = FactoryBot.create(:user)
+  20.times do
+    user = FactoryBot.create(:user)
 
-  10.times do
-    FactoryBot.create(:project, user: user)
+    rand(20).times do
+      FactoryBot.create(:project, user: user)
+    end
   end
 end

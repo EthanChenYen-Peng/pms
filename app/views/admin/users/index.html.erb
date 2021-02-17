@@ -15,9 +15,9 @@
           </h5>
           <small> <%= t('created_at') %>: <%= time_ago_in_words(user.created_at) %></small>
         </div>
-        <div>
-          Project count 
-        </div>
+        <small>
+          Number of projects: <%= user.projects.size %>
+        </small>
       </li>
     <% end %>
   </ul>
