@@ -16,9 +16,13 @@
           <small> <%= t('created_at') %>: <%= time_ago_in_words(user.created_at) %></small>
         </div>
         <div>
-          Project count
+          Project count 
         </div>
       </li>
     <% end %>
   </ul>
+
+  <div class="my-3">
+    <%= paginate @users %>
+  </div>
 </div>
