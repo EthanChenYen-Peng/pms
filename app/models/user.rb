@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   before_save { email.downcase! }
+  before_destroy :can_destroy?
+
   has_many :projects, dependent: :destroy
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -13,4 +15,13 @@ class User < ApplicationRecord
   has_secure_password
 
   paginates_per 10
+
+  private
+
+  def can_destroy?
+    if admin && self.class.where(admin: true).count <= 1
+      errors.add(:alert, 'Cannot delete the only remaining admin account.')
+      throw :abort
+    end
+  end
 end

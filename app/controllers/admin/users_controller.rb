@@ -34,9 +34,14 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def destroy
-    @user.destroy
-    flash[:notice] = t('user.delete.success')
-    redirect_to admin_users_path
+    if @user.destroy
+      flash[:notice] = t('user.delete.success')
+      redirect_to admin_users_path
+    else
+      flash[:alert] = [ t('user.delete.failure'),@user.errors[:alert]].flatten
+
+      redirect_to admin_user_path(@user)
+    end
   end
 
   private
