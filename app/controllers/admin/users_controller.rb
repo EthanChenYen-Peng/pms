@@ -1,5 +1,5 @@
 class Admin::UsersController < Admin::ApplicationController
-  before_action :set_user, only: %i[show edit update]
+  before_action :set_user, only: %i[show edit update destroy]
   def index
     @users = User.all
   end
@@ -31,6 +31,12 @@ class Admin::UsersController < Admin::ApplicationController
       flash.now[:alert] = t('user.create.failure')
       render :new
     end
+  end
+
+  def destroy
+    @user.destroy
+    flash[:notice] = t('user.delete.success')
+    redirect_to admin_users_path
   end
 
   private
