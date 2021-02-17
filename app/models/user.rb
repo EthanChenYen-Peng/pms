@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   before_save { email.downcase! }
-  has_many :projects
+  has_many :projects, dependent: :destroy
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :username, presence: true, uniqueness: true

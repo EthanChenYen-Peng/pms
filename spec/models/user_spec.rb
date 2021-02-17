@@ -28,7 +28,7 @@ RSpec.describe User, type: :model do
     expect(user.errors[:email]).to match_array(['is invalid'])
   end
 
-  it 'email unique validation should be case-sensitive' do 
+  it 'email unique validation should be case-sensitive' do
     user = User.create(username: 'Ethan', email: 'ethan@gmail.com', password: 'asdf')
     user2 = FactoryBot.build(:user, email: user.email.upcase)
     user2.save
@@ -42,5 +42,19 @@ RSpec.describe User, type: :model do
     user.save
 
     expect(user.email).to eq('ethan@gmail.com')
+  end
+
+  it 'should delete all its projects once it is being deleted' do
+    user = FactoryBot.create(:user)
+    5.times do
+      FactoryBot.create(:project, user: user)
+    end
+
+    projects = user.projects.all
+    user.destroy
+
+    projects.each do |project|
+      expect(Project.find_by(id: project.id)).to eq([])
+    end
   end
 end
