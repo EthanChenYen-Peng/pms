@@ -3,6 +3,7 @@ class User < ApplicationRecord
   before_destroy :can_destroy?
 
   has_many :projects, dependent: :destroy
+  has_many :labels, dependent: :destroy
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :username, presence: true, uniqueness: true
