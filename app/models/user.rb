@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
   def can_destroy?
     if admin && self.class.where(admin: true).count <= 1
-      errors.add(:alert, 'Cannot delete the only remaining admin account.')
+      errors.add(:alert, I18n.t('admin.users.delete.failure'))
       throw :abort
     end
   end

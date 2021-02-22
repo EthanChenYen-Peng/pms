@@ -49,6 +49,17 @@ en:
       failure: 'Project has not been deleted.'
     access:
       unauthorized: 'You can only edit or delete your own article'
+  label:
+    create:
+      success: 'Label has been created.'
+      failure: 'Label has not been created.'
+      duplicate: 'You already have a label with the same name.'
+    update:
+      success: 'Label has been updated.'
+      failure: 'Label has not been updated.'
+    delete:
+      success: 'Label has been deleted.'
+      failure: 'Label has not been deleted.'
   user:
     create:
       success: 'Account has been created.'
@@ -75,11 +86,19 @@ en:
       new: 'New Project'
       edit: 'Edit Project'
       delete: 'Delete Project'
+    labels:
+      index: 'Labels'
+    label:
+      new: 'New Label'
     users:
       new: 'Sign Up'
     sessions:
       new: 'Login'
       destroy: 'Logout'
+  admin: 
+    users:
+      delete:
+        failure: 'Cannot delete the only remaining admin account.'
   sort: 'Sort'
   search: 'Search'
   status: 'Status'

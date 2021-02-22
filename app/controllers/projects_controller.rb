@@ -62,7 +62,6 @@ class ProjectsController < ApplicationController
     @search_terms = params[:search] || ''
   end
  
-  # TODO: Command an query in a function. Might not be a good idea.
   def project_sort_by_params
     Hash[@selected_sort_by, @selected_order_direction]
   end

@@ -22,6 +22,12 @@
       <li class="nav-item">
         <%= link_to t('links.project.new'), new_project_path, class: 'nav-link' %>
       </li>
+      <li class="nav-item">
+        <%= link_to t('links.labels.index'), labels_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to t('links.label.new'), new_label_path, class: 'nav-link' %>
+      </li>
     </ul>
     <ul class="navbar-nav justify-content-end">
       <% if login? %>

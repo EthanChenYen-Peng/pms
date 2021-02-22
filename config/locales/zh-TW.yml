@@ -15,6 +15,17 @@ zh-TW:
       failure: '專案失刪除敗'
     access:
       unauthorized: '您只能編輯或刪除自己的文章'
+  label:
+    create:
+      success: '標籤已創建'
+      failure: '標籤已被刪除'
+      duplicate: '您已經有同名標籤'
+    update:
+      success: '標籤已更新'
+      failure: '標籤更新失敗'
+    delete:
+      success: '標籤已刪除'
+      failure: '標籤刪除失敗'
   user:
     create:
       success: '帳戶已創建'
@@ -32,6 +43,10 @@ zh-TW:
     delete:
       success: '登出成功'
       failure: '登出失敗'
+  admin: 
+    users:
+      delete:
+        failure: '無法刪除唯一剩餘的管理員帳戶'
   activerecord:
     models:
       project:
@@ -80,6 +95,10 @@ zh-TW:
       new: '新專案'
       edit: '編輯專案'
       delete: '刪除專案'
+    labels:
+      index: '標籤'
+    label:
+      new: '新標籤'
     users:
       new: '註冊'
     sessions:

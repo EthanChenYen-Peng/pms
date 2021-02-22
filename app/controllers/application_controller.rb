@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   http_basic_authenticate_with name: 'pms', password: 'pms-password' if Rails.env.production?
 
+  around_action :switch_locale
+
   # Allow these methods to be avaliable in views.
   helper_method :current_user, :login?
 
@@ -19,7 +21,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  around_action :switch_locale
+  def require_the_same_user
+    if current_user != @project.user
+      flash[:alert] = t('project.access.unauthorized')
+      redirect_to projects_path
+    end
+  end
 
   def switch_locale(&action)
     locale = params[:locale] || I18n.default_locale

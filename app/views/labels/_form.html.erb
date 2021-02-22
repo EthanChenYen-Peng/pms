@@ -1,0 +1,10 @@
+<%= form_with(model: label, local: true) do |f| %>
+  <% if label.errors.any? %>
+    <%= render 'shared/errors', errors: label.errors.full_messages %>
+  <% end %>
+  <div class="form-group" >
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control #{'is-invalid' if label.errors[:name].any?}" %>
+  </div>
+  <%= f.submit nil, class: 'btn btn-info' %>
+<% end %>
