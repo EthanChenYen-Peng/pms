@@ -48,7 +48,7 @@ en:
       success: 'Project has been deleted.'
       failure: 'Project has not been deleted.'
     access:
-      unauthorized: 'You can only edit or delete your own article'
+      unauthorized: 'You can only edit or delete your own project'
   label:
     create:
       success: 'Label has been created.'

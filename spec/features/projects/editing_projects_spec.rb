@@ -16,7 +16,7 @@ RSpec.feature 'Users can edit projects' do
       project = FactoryBot.create(:project)
       visit edit_project_path(locale: :en, id: project.id)
 
-      expect(page).to have_content 'You can only edit or delete your own article'
+      expect(page).to have_content 'You can only edit or delete your own project'
     end
 
     scenario 'with valid inputs' do

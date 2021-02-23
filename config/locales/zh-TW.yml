@@ -14,7 +14,7 @@ zh-TW:
       success: '專案已刪除'
       failure: '專案失刪除敗'
     access:
-      unauthorized: '您只能編輯或刪除自己的文章'
+      unauthorized: '您只能編輯或刪除自己的專案'
   label:
     create:
       success: '標籤已創建'
