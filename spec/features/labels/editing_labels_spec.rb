@@ -28,4 +28,12 @@ RSpec.feature 'Users can edit existing labels' do
     expect(page).to have_content 'Label has not been updated.'
     expect(page).to have_content 'You already have a label with the same name.'
   end
+
+  scenario "cannot reach page to edit other user's label" do
+    login_as(user)
+    label = FactoryBot.create(:label)
+    visit edit_label_path(locale: :en, id: label.id)
+
+    expect(page).to have_content 'You can only edit or delete your own label'
+  end
 end

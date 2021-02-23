@@ -67,7 +67,7 @@ RSpec.feature 'Users can edit projects' do
       project = FactoryBot.create(:project)
       visit edit_project_path(locale: 'zh-TW', id: project.id)
 
-      expect(page).to have_content '您只能編輯或刪除自己的文章'
+      expect(page).to have_content '您只能編輯或刪除自己的專案'
     end
 
     scenario 'with valid inputs' do

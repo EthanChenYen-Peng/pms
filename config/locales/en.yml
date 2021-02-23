@@ -60,6 +60,8 @@ en:
     delete:
       success: 'Label has been deleted.'
       failure: 'Label has not been deleted.'
+    access:
+      unauthorized: 'You can only edit or delete your own label'
   user:
     create:
       success: 'Account has been created.'

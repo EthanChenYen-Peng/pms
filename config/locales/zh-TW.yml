@@ -26,6 +26,8 @@ zh-TW:
     delete:
       success: '標籤已刪除'
       failure: '標籤刪除失敗'
+    access:
+      unauthorized: '您只能編輯或刪除自己的標籤'
   user:
     create:
       success: '帳戶已創建'

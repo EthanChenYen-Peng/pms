@@ -1,6 +1,7 @@
 class LabelsController < ApplicationController
-  before_action :require_user
   before_action :set_label, only: %i[show edit destroy update]
+  before_action :require_user
+  before_action :require_the_same_user, only: [:edit, :update, :destroy]
 
   def index
     @labels = current_user.labels.all
@@ -48,5 +49,12 @@ class LabelsController < ApplicationController
 
   def set_label
     @label = Label.find(params[:id])
+  end
+
+  def require_the_same_user
+    if current_user != @label.user
+      flash[:alert] = t('label.access.unauthorized')
+      redirect_to labels_path
+    end
   end
 end

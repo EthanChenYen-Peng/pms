@@ -21,4 +21,5 @@ RSpec.feature 'Users can delete existing labels' do
     expect(page).to have_content 'Label has been deleted.'
     expect(page).to_not have_content 'Todo'
   end
+
 end
