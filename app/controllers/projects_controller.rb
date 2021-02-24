@@ -15,6 +15,9 @@ class ProjectsController < ApplicationController
     else
       @projects = current_user.projects.where(status: @selected_status)
     end
+    if params[:label_names] && params[:label_names] != ''
+      @projects = @projects.joins(:labels).where('labels.name IN (?)', get_labels)
+    end
     @projects = @projects.title_contains(@search_terms).order(project_sort_by_params).page(params[:page])
   end
 
@@ -59,16 +62,20 @@ class ProjectsController < ApplicationController
   private
 
   def set_project_query_params
-    binding.pry
     @selected_order_direction = ORDER_DIRECTIONS.include?(params[:order_direction]) ? params[:order_direction] : 'desc'
     @selected_sort_by = FILEDS_TO_SORT_BY.include?(params[:sort_by]) ? params[:sort_by] : 'created_at'
     @selected_status = PROJECT_STATUS.include?(params[:status]) ? params[:status] : 'all'
     @search_terms = params[:search] || ''
+    @label_names = params[:label_names] || ''
   end
  
   # TODO: Command an query in a function. Might not be a good idea.
   def project_sort_by_params
     Hash[@selected_sort_by, @selected_order_direction]
+  end
+
+  def get_labels
+    params[:label_names].split(',').map(&:strip)
   end
 
   def processed_labels

@@ -2,8 +2,8 @@
   <span id="remove-label-btn-<%= "#{label.id}" %>">
     <%= link_to "<span>X</span>".html_safe,
       project_remove_label_path(project, label),
+      remote: true ,
       method: :delete, 
-      remote: true,
       title: 'Remove label',
       class: 'remove'
     %>
