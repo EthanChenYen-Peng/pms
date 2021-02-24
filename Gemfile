@@ -40,6 +40,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 6.1'
   gem 'launchy', '~> 2.4', '>= 2.4.3'
   gem 'faker', '~> 2.15', '>= 2.15.1'
+  gem 'selenium-webdriver', '~> 3.142', '>= 3.142.7'
 end
 
 group :development do

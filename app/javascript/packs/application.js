@@ -10,6 +10,7 @@ import "channels"
 import 'bootstrap'
 import '../stylesheets/application.scss'
 import './datepicker'
+import './labels'
 
 Rails.start()
 Turbolinks.start()

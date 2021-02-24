@@ -6,7 +6,7 @@
 <% if @project.labels.any?  %>
   <h2>Labels:</h2>
   <div class="labels">
-    <%= render @project.labels %>
+    <%= render @project.labels, project: @project %>
   </div>
 <% end %>
 <% if @project.due_date %>
