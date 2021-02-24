@@ -23,6 +23,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.new(project_params)
+    @project.labels = processed_labels
 
     if @project.save
       flash[:notice] = t('project.create.success')
@@ -65,6 +66,12 @@ class ProjectsController < ApplicationController
   # TODO: Command an query in a function. Might not be a good idea.
   def project_sort_by_params
     Hash[@selected_sort_by, @selected_order_direction]
+  end
+
+  def processed_labels
+    params[:label_names].split(',').map do |label|
+      Label.find_or_initialize_by(name: label.strip)
+    end
   end
 
   def set_project

@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_17_080427) do
+ActiveRecord::Schema.define(version: 2021_02_23_142713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "labels", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "labels_projects", id: false, force: :cascade do |t|
+    t.bigint "label_id", null: false
+    t.bigint "project_id", null: false
+    t.index ["label_id", "project_id"], name: "index_labels_projects_on_label_id_and_project_id", unique: true
+    t.index ["project_id", "label_id"], name: "index_labels_projects_on_project_id_and_label_id"
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string "title"

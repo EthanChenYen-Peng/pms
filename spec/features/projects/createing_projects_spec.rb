@@ -17,6 +17,7 @@ RSpec.feature 'Users can create project' do
       fill_in 'project[title]', with: 'write a blog'
       fill_in 'project[content]', with: 'blog content'
       fill_in 'project[due_date]', with: Time.now + 2.days
+      fill_in 'Labels', with: 'blogging, ROR'
 
       click_button 'Create Project'
 
@@ -24,6 +25,10 @@ RSpec.feature 'Users can create project' do
       expect(page).to have_content 'write a blog'
       expect(page).to have_content 'blog content'
       expect(page).to have_content '2 days'
+      within '.labels' do
+        expect(page).to have_content 'blogging'
+        expect(page).to have_content 'ROR'
+      end
     end
 
     scenario 'with invalid inputs' do

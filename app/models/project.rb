@@ -3,6 +3,7 @@ class Project < ApplicationRecord
   validates :content, presence: true
 
   belongs_to :user, counter_cache: true
+  has_and_belongs_to_many :labels
 
   enum status: %i[todo doing done]
   enum priority: %i[low medium high]
