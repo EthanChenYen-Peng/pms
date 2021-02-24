@@ -1,3 +1,4 @@
+require 'pry'
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
   before_action :require_user
@@ -58,6 +59,7 @@ class ProjectsController < ApplicationController
   private
 
   def set_project_query_params
+    binding.pry
     @selected_order_direction = ORDER_DIRECTIONS.include?(params[:order_direction]) ? params[:order_direction] : 'desc'
     @selected_sort_by = FILEDS_TO_SORT_BY.include?(params[:sort_by]) ? params[:sort_by] : 'created_at'
     @selected_status = PROJECT_STATUS.include?(params[:status]) ? params[:status] : 'all'
