@@ -53,6 +53,40 @@ RSpec.feature 'Users can edit projects' do
       expect(page).to have_content 'Project has not been updated.'
       expect(page).to have_content "Title can't be blank"
     end
+
+    context 'when the project has labels' do
+      let(:project) { FactoryBot.create(:project) }
+      before do
+        project.labels << FactoryBot.create(:label, name: 'PMS')
+        project.labels << FactoryBot.create(:label, name: 'React')
+        login_as(project.user)
+        visit project_path(locale: :en, id: project.id)
+      end
+
+      it 'sees existing labels on the edit form' do
+        click_link 'Edit Project'
+
+        within '.labels' do
+          expect(page).to have_content 'PMS'
+          expect(page).to have_content 'React'
+        end
+      end
+
+      it 'can add new labels to a project' do
+        click_link 'Edit Project'
+        fill_in 'Labels', with: 'bug, Vue'
+        click_button 'Update Project'
+
+        expect(page).to have_content 'Project has been updated'
+
+        within ".labels" do
+          expect(page).to have_content('PMS')
+          expect(page).to have_content('React')
+          expect(page).to have_content('bug')
+          expect(page).to have_content('Vue')
+        end
+      end
+    end
   end
 
   context 'locale: zh-TW' do

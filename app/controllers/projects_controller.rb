@@ -40,6 +40,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
+      @project.labels <<  processed_labels
       flash[:notice] = t('project.update.success')
       redirect_to project_path(@project)
     else
