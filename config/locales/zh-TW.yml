@@ -105,3 +105,5 @@ zh-TW:
   signup: '註冊'
   require_login: '您需要先登錄'
   unauthorized_access: '您無權訪問此頁面'
+  error_page_not_found: '此頁面不存在！'
+  error_internal_server_error: 'Opps 我們這邊出了點問題'

@@ -39,6 +39,8 @@ module Pms
     I18n.default_locale = :en
 
     config.time_zone = 'Asia/Taipei'
+
+    config.exceptions_app = self.routes
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
