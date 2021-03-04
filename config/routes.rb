@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
 
+    get '/404', to: 'errors#not_found', via: :all, as: 'error_not_found'
+    get '/500', to: 'errors#internal_server_error', via: :all, as: 'error_server_error'
+
     namespace "admin" do
       root 'admin#index'
       resources :users

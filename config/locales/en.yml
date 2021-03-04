@@ -92,3 +92,5 @@ en:
   signup: 'Sign up'
   require_login: 'You need to login first.'
   unauthorized_access: 'You are not authorized to access this page.'
+  error_page_not_found: 'The page you are requesting does not exist!'
+  error_internal_server_error: 'Opps somthing wrong on our side :('
