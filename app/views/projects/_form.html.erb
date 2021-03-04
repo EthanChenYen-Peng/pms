@@ -14,5 +14,10 @@
     <%= f.label :due_date %>
     <input class='form-control' name='project[due_date]' id='project_due_date' />
   </div>
-    <%= f.submit nil, class: 'btn btn-info' %>
+  <div class='form-group labels'>
+    <%= label_tag :label_names, 'Labels' %>
+    <%= render @project.labels, project: @project %>
+    <%= text_field_tag :label_names, "", class: 'form-control' %>
+  </div>
+  <%= f.submit nil, class: 'btn btn-info' %>
 <% end %>

@@ -8,8 +8,11 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import 'bootstrap'
+import '@fortawesome/fontawesome-free/css/all.min.css'
+
 import '../stylesheets/application.scss'
 import './datepicker'
+import './labels'
 
 Rails.start()
 Turbolinks.start()

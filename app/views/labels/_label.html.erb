@@ -1,0 +1,8 @@
+<div class="label">
+  <span id="remove-label-btn-<%= "#{label.id}" %>">
+    <%= link_to(project_remove_label_path(project, label),remote: true, method: :delete, class: 'remove') do %>
+  <i class="fas fa-times text-danger"></i>
+<% end %>    
+  </span>
+  <%= label.name %>
+</div>

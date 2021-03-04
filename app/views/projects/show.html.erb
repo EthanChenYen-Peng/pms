@@ -2,6 +2,13 @@
 
 <h2><%= @project.title %></h2>
 <p><%= @project.content %></p>
+
+<% if @project.labels.any?  %>
+  <h2>Labels:</h2>
+  <div class="labels">
+    <%= render @project.labels, project: @project %>
+  </div>
+<% end %>
 <% if @project.due_date %>
   <div>
     Due date : <%= distance_of_time_in_words(Time.now, @project.due_date) %>

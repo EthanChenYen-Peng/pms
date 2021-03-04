@@ -1,3 +1,4 @@
+require 'pry'
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
   before_action :require_user
@@ -14,6 +15,9 @@ class ProjectsController < ApplicationController
     else
       @projects = current_user.projects.where(status: @selected_status)
     end
+    if params[:label_names] && params[:label_names] != ''
+      @projects = @projects.joins(:labels).where('labels.name IN (?)', get_labels)
+    end
     @projects = @projects.title_contains(@search_terms).order(project_sort_by_params).page(params[:page])
   end
 
@@ -23,6 +27,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.new(project_params)
+    @project.labels = processed_labels
 
     if @project.save
       flash[:notice] = t('project.create.success')
@@ -39,6 +44,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
+      @project.labels <<  processed_labels
       flash[:notice] = t('project.update.success')
       redirect_to project_path(@project)
     else
@@ -60,11 +66,22 @@ class ProjectsController < ApplicationController
     @selected_sort_by = FILEDS_TO_SORT_BY.include?(params[:sort_by]) ? params[:sort_by] : 'created_at'
     @selected_status = PROJECT_STATUS.include?(params[:status]) ? params[:status] : 'all'
     @search_terms = params[:search] || ''
+    @label_names = params[:label_names] || ''
   end
  
   # TODO: Command an query in a function. Might not be a good idea.
   def project_sort_by_params
     Hash[@selected_sort_by, @selected_order_direction]
+  end
+
+  def get_labels
+    params[:label_names].split(',').map(&:strip)
+  end
+
+  def processed_labels
+    params[:label_names].split(',').map do |label|
+      Label.find_or_initialize_by(name: label.strip)
+    end
   end
 
   def set_project
