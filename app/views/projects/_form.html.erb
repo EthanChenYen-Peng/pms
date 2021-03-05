@@ -1,6 +1,6 @@
 <%= form_with(model: project, local: true) do |f|  %>
   <% if project.errors.any? %>
-    <%= render 'shared/errors', errors: project.errors.full_messages %>
+    <%= render 'shared/errors', errors: project.errors %>
   <% end %>
   <div class="form-group" >
     <%= f.label :title %>

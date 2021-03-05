@@ -38,8 +38,7 @@ class Admin::UsersController < Admin::ApplicationController
       flash[:notice] = t('user.delete.success')
       redirect_to admin_users_path
     else
-      flash[:alert] = [ t('user.delete.failure'),@user.errors[:alert]].flatten
-
+      flash[:alert] = [t('user.delete.failure')] + @user.errors.full_messages
       redirect_to admin_user_path(@user)
     end
   end
