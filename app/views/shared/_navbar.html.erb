@@ -13,9 +13,6 @@
         <%= link_to "中文", switch_locale_path(:"zh-TW"),class:  "nav-link #{ "active" if get_locale == 'zh-TW'}"%>
       </li>
 
-      <li class="nav-item">
-        <%= link_to t('links.root'), root_path, class: 'nav-link' %>
-      </li> 
       <% if login? %>
         <li class="nav-item">
           <%= link_to t('links.projects.index'), projects_path, class: 'nav-link' %>

@@ -27,7 +27,7 @@ RSpec.describe 'Accessing admin panel' do
       visit admin_root_path
 
       expect(page).to have_content('You are not authorized to access this page.')
-      expect(current_path).to eq(root_path)
+      expect(current_path).to eq(projects_path(locale: :en))
     end
 
     scenario "I cannot access the page to edit other user's info" do
@@ -38,7 +38,7 @@ RSpec.describe 'Accessing admin panel' do
       visit edit_admin_user_path(locale: :en, id: user_two.id)
 
       expect(page).to have_content('You are not authorized to access this page.')
-      expect(current_path).to eq(root_path)
+      expect(current_path).to eq(projects_path(locale: :en))
     end
 
     scenario "I cannot view other user's page " do
@@ -49,7 +49,7 @@ RSpec.describe 'Accessing admin panel' do
       visit admin_user_path(locale: :en, id: user_two.id)
 
       expect(page).to have_content('You are not authorized to access this page.')
-      expect(current_path).to eq(root_path)
+      expect(current_path).to eq(projects_path(locale: :en))
     end
   end
 end

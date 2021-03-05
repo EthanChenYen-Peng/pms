@@ -12,11 +12,11 @@ module ApplicationHelper
   end
 
   def switch_locale_path(language)
-    # require 'pry'; binding.pry
     if request.path == '/'
       "/#{language.to_s}"
     else
       request.path.sub(locale.to_s, language.to_s)
     end
   end
+
 end

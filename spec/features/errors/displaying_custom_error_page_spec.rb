@@ -29,7 +29,7 @@ RSpec.feature 'User should see our custom error page' do
     end
 
     scenario 'when page not found users should see 500 page' do
-      visit 'zh-TW/500'
+      visit '/zh-TW/500'
 
       expect(page).to have_content 'Opps 我們這邊出了點問題'
     end
