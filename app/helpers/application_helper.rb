@@ -10,4 +10,13 @@ module ApplicationHelper
       yield message
     end
   end
+
+  def switch_locale_path(language)
+    if request.path == '/'
+      "/#{language.to_s}"
+    else
+      request.path.sub(locale.to_s, language.to_s)
+    end
+  end
+
 end

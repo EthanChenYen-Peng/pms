@@ -85,6 +85,7 @@ zh-TW:
     sessions:
       new: '登入'
       destroy: '登出'
+    get_started: '註冊'
   datetime:
     distance_in_words:
       about_x_hours: "%{count} 小時前"

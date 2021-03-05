@@ -68,7 +68,6 @@ class ProjectsController < ApplicationController
     @label_names = params[:label_names] || ''
   end
  
-  # TODO: Command an query in a function. Might not be a good idea.
   def project_sort_by_params
     Hash[@selected_sort_by, @selected_order_direction]
   end

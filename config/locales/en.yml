@@ -80,6 +80,7 @@ en:
     sessions:
       new: 'Login'
       destroy: 'Logout'
+    get_started: 'Get Started'
   sort: 'Sort'
   search: 'Search'
   status: 'Status'

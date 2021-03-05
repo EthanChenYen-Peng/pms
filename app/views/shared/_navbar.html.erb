@@ -7,21 +7,20 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item">
-        <%= link_to "English", root_path(locale: :en) ,class: "nav-link #{ "active" if get_locale == 'en'}"%>
+        <%= link_to "English", switch_locale_path(:en) ,class: "nav-link #{ "active" if get_locale == 'en'}"%>
       </li>
       <li class="nav-item">
-        <%= link_to "中文", root_path(locale: 'zh-TW'),class:  "nav-link #{ "active" if get_locale == 'zh-TW'}"%>
+        <%= link_to "中文", switch_locale_path(:"zh-TW"),class:  "nav-link #{ "active" if get_locale == 'zh-TW'}"%>
       </li>
 
-      <li class="nav-item">
-        <%= link_to t('links.root'), root_path, class: 'nav-link' %>
-      </li> 
-      <li class="nav-item">
-        <%= link_to t('links.projects.index'), projects_path, class: 'nav-link' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to t('links.project.new'), new_project_path, class: 'nav-link' %>
-      </li>
+      <% if login? %>
+        <li class="nav-item">
+          <%= link_to t('links.projects.index'), projects_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t('links.project.new'), new_project_path, class: 'nav-link' %>
+        </li>
+      <% end %>
     </ul>
     <ul class="navbar-nav justify-content-end">
       <% if login? %>

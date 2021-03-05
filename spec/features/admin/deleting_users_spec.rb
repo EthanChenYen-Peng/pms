@@ -26,7 +26,7 @@ RSpec.feature 'As an admin, I can delete user account' do
     click_on 'Delete'
 
     expect(page).to have_content 'You are not authorized to access this page.'
-    expect(current_path).to eq(root_path)
+    expect(current_path).to eq(root_path(locale: :en))
   end
 
   scenario 'deleting myself when I am the only admin should fail' do
