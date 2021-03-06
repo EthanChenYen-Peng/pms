@@ -7,10 +7,10 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item">
-        <%= link_to "English", switch_locale_path(:en) ,class: "nav-link #{ "active" if get_locale == 'en'}"%>
+        <%= link_to "English", switch_locale_path(:en) ,class: "nav-link #{ "active" if locale == :en}"%>
       </li>
       <li class="nav-item">
-        <%= link_to "中文", switch_locale_path(:"zh-TW"),class:  "nav-link #{ "active" if get_locale == 'zh-TW'}"%>
+        <%= link_to "中文", switch_locale_path(:"zh-TW"),class:  "nav-link #{ "active" if locale == :'zh-TW'}"%>
       </li>
 
       <% if login? %>

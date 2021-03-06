@@ -10,13 +10,30 @@ RSpec.describe Project do
     expect(project.errors[:content]).to match_array(["can't be blank"])
   end
 
-  it 'title should be unique' do
-    FactoryBot.create(:project, title: 'project1')
-    project = Project.new(title: 'project1', content: 'content1')
+  describe 'title should be unique under the same user' do
+    context 'when creating project with the same title as an existing project' do
+      it 'should fail' do
+        user = FactoryBot.create(:user)
+        FactoryBot.create(:project, title: 'project1', user: user)
+        project = Project.new(title: 'project1', content: 'content1', user: user)
 
-    project.save
-    expect(project.errors.any?).to be(true)
-    expect(project.errors[:title]).to match_array(['has already been taken'])
+        project.save
+        expect(project.errors.any?).to be(true)
+        expect(project.errors[:title]).to match_array(['has already been taken'])
+      end
+    end
+
+    context 'when creating project with the same title as an existing project that is not his own' do
+      it 'should succeed' do
+        user = FactoryBot.create(:user)
+        FactoryBot.create(:project, title: 'project1', user: user)
+        project = Project.new(title: 'project1', content: 'content1')
+
+        project.save
+        expect(project.errors.any?).to be(true)
+        expect(project.errors[:title]).to match_array([])
+      end
+    end
   end
 
   it 'can change status' do

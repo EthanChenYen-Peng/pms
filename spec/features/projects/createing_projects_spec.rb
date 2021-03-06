@@ -41,9 +41,9 @@ RSpec.feature 'Users can create project' do
       expect(page).to have_content "Content can't be blank"
     end
 
-    scenario 'with duplicate title' do
+    scenario "with title same as one of your existing project" do
       login_as(user)
-      FactoryBot.create(:project, title: 'project1')
+      FactoryBot.create(:project, title: 'project1', user: user)
       visit new_project_path
       fill_in 'project[title]', with: 'project1'
       fill_in 'project[content]', with: 'blog content'
@@ -51,6 +51,19 @@ RSpec.feature 'Users can create project' do
 
       expect(page).to have_content 'Project has not been created.'
       expect(page).to have_content 'Title has already been taken'
+    end
+
+    scenario "with title same as one of other user's existing project" do
+      login_as(user)
+      FactoryBot.create(:project, title: 'project1')
+      visit new_project_path
+      fill_in 'project[title]', with: 'project1'
+      fill_in 'project[content]', with: 'blog content'
+      click_button 'Create Project'
+
+      expect(page).to have_content 'Project has been created.'
+      expect(page).to have_content 'project1'
+      expect(page).to have_content 'blog content'
     end
   end
 
@@ -86,9 +99,9 @@ RSpec.feature 'Users can create project' do
       expect(page).to have_content '內容不能為空'
     end
 
-    scenario 'with duplicate title' do
+    scenario "with title same as one of your existing project" do
       login_as(user)
-      FactoryBot.create(:project, title: 'project1')
+      FactoryBot.create(:project, title: 'project1', user: user)
       visit new_project_path(locale: 'zh-TW')
       fill_in 'project[title]', with: 'project1'
       fill_in 'project[content]', with: 'blog content'
@@ -96,6 +109,19 @@ RSpec.feature 'Users can create project' do
 
       expect(page).to have_content '專案創建失敗'
       expect(page).to have_content '標題已經存在'
+    end
+
+    scenario "with title same as one of other user's existing project" do
+      login_as(user)
+      FactoryBot.create(:project, title: 'project1')
+      visit new_project_path(locale: 'zh-TW')
+      fill_in 'project[title]', with: 'project1'
+      fill_in 'project[content]', with: 'blog content'
+      click_button '新專案'
+
+      expect(page).to have_content '專案已創建'
+      expect(page).to have_content 'project1'
+      expect(page).to have_content 'blog content'
     end
   end
 end
