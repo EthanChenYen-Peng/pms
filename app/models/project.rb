@@ -1,5 +1,8 @@
 class Project < ApplicationRecord
-  validates :title, presence: true, uniqueness: true
+  validates :title, presence: true, uniqueness: {
+    scope: :user
+  }
+
   validates :content, presence: true
 
   belongs_to :user, counter_cache: true
@@ -11,10 +14,9 @@ class Project < ApplicationRecord
   scope :title_contains,
         ->(pattern) { where('title ILIKE (?)', "%#{pattern}%") }
 
-
   paginates_per 10
 
-  priorities.each do |level, value|
+  priorities.each do |level, _value|
     define_method "#{level}_priority?" do
       send("#{level}?")
     end
