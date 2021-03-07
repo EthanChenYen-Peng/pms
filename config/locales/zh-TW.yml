@@ -41,6 +41,7 @@ zh-TW:
         title: '標題'
         content: '內容'
         due_date: '結束日期'
+        start_date: '開始日期'
       user:
         username: '用戶名'
         email: 'Email'
@@ -101,6 +102,7 @@ zh-TW:
   title: '專案'
   created_at: '創建於'
   due_date: '結束日期'
+  start_date: '開始日期'
   ascending: '升序'
   descending: '降序'
   signup: '註冊'

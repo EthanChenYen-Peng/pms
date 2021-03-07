@@ -6,4 +6,9 @@ document.addEventListener('turbolinks:load', function () {
         enableTime: true,
         minDate: 'today'
     })
+
+    flatpickr("#project_start_date", {
+        enableTime: true,
+        minDate: 'today'
+    })
 })

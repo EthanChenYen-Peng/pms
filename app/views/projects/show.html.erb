@@ -9,9 +9,14 @@
     <%= render @project.labels, project: @project %>
   </div>
 <% end %>
+<% if @project.start_date %>
+  <div>
+    Start date: <%= distance_of_time_in_words(Time.now, @project.start_date) %>
+  </div>
+<% end %>
 <% if @project.due_date %>
   <div>
-    Due date : <%= distance_of_time_in_words(Time.now, @project.due_date) %>
+    Due date: <%= distance_of_time_in_words(Time.now, @project.due_date) %>
   </div>
 <% end %>
 <% if current_user == @project.user %>
