@@ -87,7 +87,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :content, :due_date)
+    params.require(:project).permit(:title, :content, :due_date, :start_date)
   end
 
   def require_the_same_user

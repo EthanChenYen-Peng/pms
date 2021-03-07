@@ -4,6 +4,7 @@ class Project < ApplicationRecord
   }
 
   validates :content, presence: true
+  validate :due_date_cannot_be_earlier_than_start_date
 
   belongs_to :user, counter_cache: true
   has_and_belongs_to_many :labels
@@ -23,6 +24,12 @@ class Project < ApplicationRecord
 
     define_method "#{level}_priority!" do
       send("#{level}!")
+    end
+  end
+
+  def due_date_cannot_be_earlier_than_start_date
+    if due_date && start_date && (due_date < start_date)
+      errors.add(:due_date, :cannot_be_earlier_than_start_date)
     end
   end
 end

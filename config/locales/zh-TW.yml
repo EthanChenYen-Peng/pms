@@ -41,6 +41,7 @@ zh-TW:
         title: '標題'
         content: '內容'
         due_date: '結束日期'
+        start_date: '開始日期'
       user:
         username: '用戶名'
         email: 'Email'
@@ -67,6 +68,8 @@ zh-TW:
               taken: '標題已經存在'
             content: 
               blank: '內容不能為空'
+            due_date:
+              cannot_be_earlier_than_start_date: "不能早於開始日期"
   helpers:
     submit:
       create: "新%{model}"
@@ -88,10 +91,10 @@ zh-TW:
     get_started: '註冊'
   datetime:
     distance_in_words:
-      about_x_hours: "%{count} 小時前"
-      about_x_minutes: "%{count} 分鐘前"
-      about_x_days: "%{count} 幾天前"
-      about_x_months: "%{count} 個月前"
+      about_x_hours: "%{count} 小時"
+      about_x_minutes: "%{count} 分鐘"
+      about_x_days: "%{count} 幾天"
+      about_x_months: "%{count} 個月"
       x_days: "%{count} 天"
       x_hours: "%{count} 小時"
       x_minutes: "%{count} 分鐘"
@@ -101,6 +104,7 @@ zh-TW:
   title: '專案'
   created_at: '創建於'
   due_date: '結束日期'
+  start_date: '開始日期'
   ascending: '升序'
   descending: '降序'
   signup: '註冊'
@@ -108,3 +112,7 @@ zh-TW:
   unauthorized_access: '您無權訪問此頁面'
   error_page_not_found: '此頁面不存在！'
   error_internal_server_error: 'Opps 我們這邊出了點問題'
+  time_ago_in_words: '%{days}前'
+  time_to_future_in_words: '在 %{days}'
+  priority: '優先順序'
+  labels: '標籤'

@@ -27,4 +27,20 @@ RSpec.describe ApplicationHelper do
       end
     end
   end
+
+  describe '#better_distance_of_time_in_words' do
+    context 'future event' do
+      it 'displays times to event' do
+        future_date = helper.better_distance_of_time_in_words(Time.now + 2.day)
+        expect(future_date).to eq('in 2 days')
+      end
+    end
+
+    context 'past event' do
+      it 'displays times ago since the event has started' do
+        past_date = helper.better_distance_of_time_in_words(Time.now - 2.day)
+        expect(past_date).to eq('2 days ago')
+      end
+    end
+  end
 end
