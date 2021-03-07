@@ -1,12 +1,12 @@
 <h1>Projects</h1>
 <%= form_with url: projects_path, method: :get , id: 'project-search-form' do |f| %>
   <div class="form-group">
-    <%= f.label t('title'), for: 'search_title' %>
-    <%= f.text_field :search, class: 'form-control', id: 'search_title', value: @search_terms %>
+    <%= f.label t('search'), for: :search %>
+    <%= f.text_field :search, class: 'form-control', value: @search_terms %>
   </div>
   <div class="form-row mb-5">
     <div class="form-group col-md-6">
-      <%= label_tag :label_names, 'Labels' %>
+      <%= label_tag :label_names, t('labels') %>
       <%= text_field_tag :label_names, "", class: 'form-control', value: @label_names %>
     </div>
     <div class="form-group col-md-4">

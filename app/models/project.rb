@@ -12,8 +12,12 @@ class Project < ApplicationRecord
   enum status: %i[todo doing done]
   enum priority: %i[low medium high]
 
-  scope :title_contains,
-        ->(pattern) { where('title ILIKE (?)', "%#{pattern}%") }
+  scope :title_or_content_contains,
+        lambda { |pattern|
+          where('title ILIKE (?) OR content ILIKE (?)',
+                "%#{pattern}%",
+                "%#{pattern}%")
+        }
 
   paginates_per 10
 
@@ -28,8 +32,6 @@ class Project < ApplicationRecord
   end
 
   def due_date_cannot_be_earlier_than_start_date
-    if due_date && start_date && (due_date < start_date)
-      errors.add(:due_date, :cannot_be_earlier_than_start_date)
-    end
+    errors.add(:due_date, :cannot_be_earlier_than_start_date) if due_date && start_date && (due_date < start_date)
   end
 end
