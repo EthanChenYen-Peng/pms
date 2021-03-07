@@ -113,4 +113,5 @@ zh-TW:
   error_page_not_found: '此頁面不存在！'
   error_internal_server_error: 'Opps 我們這邊出了點問題'
   time_ago_in_words: '%{days}前'
-  time_to_future_in_words: '在%{days}'
+  time_to_future_in_words: '在 %{days}'
+  priority: '優先順序'
