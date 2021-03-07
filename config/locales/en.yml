@@ -91,6 +91,7 @@ en:
   search: 'Search'
   status: 'Status'
   title: 'Title'
+  start_date: 'Start date'
   due_date: 'Due date'
   created_at: 'Created at'
   ascending: 'Ascending'
@@ -101,3 +102,5 @@ en:
   unauthorized_access: 'You are not authorized to access this page.'
   error_page_not_found: 'The page you are requesting does not exist!'
   error_internal_server_error: 'Opps somthing wrong on our side :('
+  time_ago_in_words: '%{days} ago'
+  time_to_future_in_words: 'in %{days}'

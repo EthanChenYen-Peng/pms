@@ -5,7 +5,7 @@ RSpec.describe Project do
     project = Project.new
 
     expect(project.valid?).to be(false)
-    expect(project.full_messages).to include("Title can't be blank", "Content can't be blank")
+    expect(project.errors.full_messages).to include("Title can't be blank", "Content can't be blank")
   end
 
   describe 'title should be unique under the same user' do

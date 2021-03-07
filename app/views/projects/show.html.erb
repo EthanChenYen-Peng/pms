@@ -11,12 +11,12 @@
 <% end %>
 <% if @project.start_date %>
   <div>
-    Start date: <%= distance_of_time_in_words(Time.now, @project.start_date) %>
+    <%= t('start_date')%>: <%= better_distance_of_time_in_words(@project.start_date) %>
   </div>
 <% end %>
 <% if @project.due_date %>
   <div>
-    Due date: <%= distance_of_time_in_words(Time.now, @project.due_date) %>
+    <%= t('due_date')%>: <%= better_distance_of_time_in_words(@project.due_date) %>
   </div>
 <% end %>
 <% if current_user == @project.user %>

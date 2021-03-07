@@ -25,8 +25,8 @@ RSpec.feature 'Users can create project' do
       expect(page).to have_content 'Project has been created.'
       expect(page).to have_content 'write a blog'
       expect(page).to have_content 'blog content'
-      expect(page).to have_content 'Start date: 1 day'
-      expect(page).to have_content 'Due date: 2 days'
+      expect(page).to have_content 'Start date: in 1 day'
+      expect(page).to have_content 'Due date: in 2 days'
       within '.labels' do
         expect(page).to have_content 'blogging'
         expect(page).to have_content 'ROR'
