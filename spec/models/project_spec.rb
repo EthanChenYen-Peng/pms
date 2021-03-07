@@ -61,6 +61,36 @@ RSpec.describe Project do
     expect(project.priority).to eq('high')
   end
 
+  describe 'start_date cannot be earlier than due_date' do
+    context 'when start date is not specified' do
+      it 'is valid' do
+        project = FactoryBot.build(:project,
+                                   start_date: nil,
+                                   due_date: Date.today + 1)
+        expect(project.valid?).to be(true)
+      end
+    end
+
+    context 'when due date is later than start date' do
+      it 'is valid' do
+        project = FactoryBot.build(:project,
+                                   start_date: Date.today + 1,
+                                   due_date: Date.today + 2)
+        expect(project.valid?).to be(true)
+      end
+    end
+
+    context 'when due date is earlier than start date' do
+      it 'is invalid' do
+        project = FactoryBot.build(:project,
+                                   start_date: Date.today + 2,
+                                   due_date: Date.today + 1)
+        expect(project.valid?).to be(false)
+        expect(project.errors.full_messages).to include("Due date can't be earlier than start date")
+      end
+    end
+  end
+
   context '#title_contains' do
     before do
       Project.delete_all

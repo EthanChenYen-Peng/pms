@@ -68,6 +68,8 @@ zh-TW:
               taken: '標題已經存在'
             content: 
               blank: '內容不能為空'
+            due_date:
+              cannot_be_earlier_than_start_date: "不能早於開始日期"
   helpers:
     submit:
       create: "新%{model}"

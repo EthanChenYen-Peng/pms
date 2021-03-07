@@ -37,6 +37,12 @@ en:
           todo: 'Todo'
           doing: 'Doing'
           done: 'Done'
+    errors:
+      models:
+        project:
+          attributes:
+            due_date:
+              cannot_be_earlier_than_start_date: "can't be earlier than start date"
   project:
     create:
       success: 'Project has been created.'
