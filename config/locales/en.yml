@@ -104,3 +104,4 @@ en:
   error_internal_server_error: 'Opps somthing wrong on our side :('
   time_ago_in_words: '%{days} ago'
   time_to_future_in_words: 'in %{days}'
+  labels: 'Labels'

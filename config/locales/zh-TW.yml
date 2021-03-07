@@ -115,3 +115,4 @@ zh-TW:
   time_ago_in_words: '%{days}前'
   time_to_future_in_words: '在 %{days}'
   priority: '優先順序'
+  labels: '標籤'
