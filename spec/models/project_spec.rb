@@ -88,27 +88,51 @@ RSpec.describe Project do
     end
   end
 
-  context '#title_contains' do
+  context '#title_or_content_contains' do
     before do
-      Project.delete_all
-      names = ['Dr. Bradly Monahan', 'Rep. Gertrudis Schaefer', 'Zachary Nader', 'Efrain Gulgowski PhD', 'Jaime Stehr',
-               'Man Mayert', 'Williemae Denesik', 'Will Beer', 'Cecil Williamson', 'Jerrod Howell', 'Jefferson Murphy', 'Luigi Wolf', 'Vernon Pouros', 'Grover Considine', 'Jimmie Wilkinson']
+      project_titles = ['Dr. Bradly Monahan', 'Rep. Gertrudis Schaefer', 'Zachary Nader', 'Efrain Gulgowski PhD', 'Jaime Stehr',
+                        'Man Mayert', 'Williemae Denesik', 'Will Beer', 'Cecil Williamson', 'Jerrod Howell', 'Jefferson Murphy', 'Luigi Wolf',
+                        'Vernon Pouros', 'Grover Considine', 'Jimmie Wilkinson', 'react tutorial']
+      project_contents = ['Rails PMS', 'Rails Blog', 'Rails & React chat app']
 
-      names.each do |name|
-        FactoryBot.create(:project, title: name)
+      project_titles.each do |title|
+        FactoryBot.create(:project, title: title)
+      end
+      project_contents.each do |content|
+        FactoryBot.create(:project, content: content)
       end
     end
 
-    scenario 'search with lowercase' do
-      expected_project_titles = ['Cecil Williamson', 'Jimmie Wilkinson', 'Will Beer', 'Williemae Denesik']
-      actual_project_titles = Project.title_contains('wil').map(&:title)
-      expect(actual_project_titles).to match_array(expected_project_titles)
+    context 'search by title' do
+      scenario 'search with lowercase' do
+        expected_project_titles = ['Cecil Williamson', 'Jimmie Wilkinson', 'Will Beer', 'Williemae Denesik']
+        actual_project_titles = Project.title_or_content_contains('wil').map(&:title)
+        expect(actual_project_titles).to match_array(expected_project_titles)
+      end
+
+      scenario 'search with uppercase' do
+        expected_project_titles = ['Cecil Williamson', 'Jimmie Wilkinson', 'Will Beer', 'Williemae Denesik']
+        actual_project_titles = Project.title_or_content_contains('WIL').map(&:title)
+        expect(actual_project_titles).to match_array(expected_project_titles)
+      end
     end
 
-    scenario 'search with uppercase' do
-      expected_project_titles = ['Cecil Williamson', 'Jimmie Wilkinson', 'Will Beer', 'Williemae Denesik']
-      actual_project_titles = Project.title_contains('WIL').map(&:title)
-      expect(actual_project_titles).to match_array(expected_project_titles)
+    context 'search by content' do
+      it 'returns all projects whose content contains search query' do
+        expected_project_contents = ['Rails PMS', 'Rails Blog', 'Rails & React chat app']
+        actual_project_contents = Project.title_or_content_contains('rails').map(&:content)
+        expect(actual_project_contents).to match_array(expected_project_contents)
+      end
+    end
+
+    context 'search terms that appear in project content and title ' do
+      it 'returns all projects whose content contains search query' do
+        results = Project.title_or_content_contains('react')
+        actual_project_contents = results.map(&:content)
+        actual_project_titles = results.map(&:title)
+        actual_result = actual_project_titles + actual_project_contents
+        expect(actual_result).to include('react tutorial', 'Rails & React chat app')
+      end
     end
   end
 end

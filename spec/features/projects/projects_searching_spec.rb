@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Projects can be searched and filetered' do
+RSpec.feature 'Projects can be searched by title and content' do
   before :each do
     names = ['Dr. Bradly Monahan', 'Rep. Gertrudis Schaefer', 'Zachary Nader', 'Efrain Gulgowski PhD', 'Jaime Stehr',
              'Man Mayert', 'Williemae Denesik', 'Will Beer', 'Cecil Williamson', 'Jerrod Howell', 'Jefferson Murphy', 'Luigi Wolf', 'Vernon Pouros', 'Grover Considine', 'Jimmie Wilkinson']
@@ -14,7 +14,7 @@ RSpec.feature 'Projects can be searched and filetered' do
   scenario 'search with only lowercase' do
     visit projects_path
 
-    fill_in 'search_title', with: 'wil'
+    fill_in 'search', with: 'wil'
     click_button 'Search'
 
     displayed_project_titles = page.find_all('.project-title').map(&:text)
@@ -25,7 +25,7 @@ RSpec.feature 'Projects can be searched and filetered' do
   scenario 'search with only uppercase letter' do
     visit projects_path
 
-    fill_in 'search_title', with: 'WIL'
+    fill_in 'search', with: 'WIL'
     click_button 'Search'
 
     displayed_project_titles = page.find_all('.project-title').map(&:text)

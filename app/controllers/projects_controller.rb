@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
     if params[:label_names] && params[:label_names] != ''
       @projects = @projects.joins(:labels).where('labels.name IN (?)', get_labels)
     end
-    @projects = @projects.title_contains(@search_terms).order(project_sort_by_params).page(params[:page])
+    @projects = @projects.title_or_content_contains(@search_terms).order(project_sort_by_params).page(params[:page])
   end
 
   def new
