@@ -17,3 +17,7 @@ unless User.any?
     end
   end
 end
+
+user = User.find_by(username: 'ethanchen')
+FactoryBot.create(title: 'Rails 專案', user: user)
+FactoryBot.create(title: 'React 專案', user: user)

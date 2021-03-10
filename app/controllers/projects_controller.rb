@@ -14,10 +14,16 @@ class ProjectsController < ApplicationController
     else
       @projects = current_user.projects.where(status: @selected_status)
     end
+
     if params[:label_names] && params[:label_names] != ''
       @projects = @projects.joins(:labels).where('labels.name IN (?)', get_labels)
     end
-    @projects = @projects.title_or_content_contains(@search_terms).order(project_sort_by_params).page(params[:page])
+
+    if @search_terms == ''
+      @projects = @projects.order(project_sort_by_params).page(params[:page])
+    else
+      @projects = @projects.search(@search_terms).order(project_sort_by_params).page(params[:page])
+    end
   end
 
   def new
@@ -67,7 +73,7 @@ class ProjectsController < ApplicationController
     @search_terms = params[:search] || ''
     @label_names = params[:label_names] || ''
   end
- 
+
   def project_sort_by_params
     Hash[@selected_sort_by, @selected_order_direction]
   end
