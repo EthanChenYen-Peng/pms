@@ -1,3 +1,4 @@
+require 'pry'
 require 'rails_helper'
 
 RSpec.describe Project do
@@ -88,10 +89,9 @@ RSpec.describe Project do
     end
   end
 
-  context '#title_or_content_contains' do
+  context '#search' do
     before do
-      project_titles = ['Dr. Bradly Monahan', 'Rep. Gertrudis Schaefer', 'Zachary Nader', 'Efrain Gulgowski PhD', 'Jaime Stehr',
-                        'Man Mayert', 'Williemae Denesik', 'Will Beer', 'Cecil Williamson', 'Jerrod Howell', 'Jefferson Murphy', 'Luigi Wolf',
+      project_titles = ['Dr. Bradly Monahan', 'Luigi Wolf',
                         'Vernon Pouros', 'Grover Considine', 'Jimmie Wilkinson', 'react tutorial']
       project_contents = ['Rails PMS', 'Rails Blog', 'Rails & React chat app']
 
@@ -103,31 +103,25 @@ RSpec.describe Project do
       end
     end
 
-    context 'search by title' do
-      scenario 'search with lowercase' do
-        expected_project_titles = ['Cecil Williamson', 'Jimmie Wilkinson', 'Will Beer', 'Williemae Denesik']
-        actual_project_titles = Project.title_or_content_contains('wil').map(&:title)
-        expect(actual_project_titles).to match_array(expected_project_titles)
-      end
-
-      scenario 'search with uppercase' do
-        expected_project_titles = ['Cecil Williamson', 'Jimmie Wilkinson', 'Will Beer', 'Williemae Denesik']
-        actual_project_titles = Project.title_or_content_contains('WIL').map(&:title)
-        expect(actual_project_titles).to match_array(expected_project_titles)
+    context 'searhc with all lowercase' do
+      it 'returns all projects whose content contains search query' do
+        expected_project_contents = ['Rails PMS', 'Rails Blog', 'Rails & React chat app']
+        actual_project_contents = Project.search('rails').map(&:content)
+        expect(actual_project_contents).to match_array(expected_project_contents)
       end
     end
 
-    context 'search by content' do
+    context 'searhc with all uppercase' do
       it 'returns all projects whose content contains search query' do
         expected_project_contents = ['Rails PMS', 'Rails Blog', 'Rails & React chat app']
-        actual_project_contents = Project.title_or_content_contains('rails').map(&:content)
+        actual_project_contents = Project.search('RAILS').map(&:content)
         expect(actual_project_contents).to match_array(expected_project_contents)
       end
     end
 
     context 'search terms that appear in project content and title ' do
       it 'returns all projects whose content contains search query' do
-        results = Project.title_or_content_contains('react')
+        results = Project.search('react')
         actual_project_contents = results.map(&:content)
         actual_project_titles = results.map(&:title)
         actual_result = actual_project_titles + actual_project_contents
