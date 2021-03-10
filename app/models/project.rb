@@ -14,18 +14,12 @@ class Project < ApplicationRecord
   enum status: %i[todo doing done]
   enum priority: %i[low medium high]
 
-  scope :title_or_content_contains,
-        lambda { |pattern|
-          where('title ILIKE (?) OR content ILIKE (?)',
-                "%#{pattern}%",
-                "%#{pattern}%")
-        }
-
   pg_search_scope :search,
                   against: %i[title content],
                   using: {
                     tsearch: {
                       dictionary: 'english',
+                      tsvector_column: 'searchable'
                     }
                   }
 
