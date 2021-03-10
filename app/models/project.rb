@@ -1,4 +1,6 @@
 class Project < ApplicationRecord
+  include PgSearch::Model
+
   validates :title, presence: true, uniqueness: {
     scope: :user
   }
@@ -18,6 +20,14 @@ class Project < ApplicationRecord
                 "%#{pattern}%",
                 "%#{pattern}%")
         }
+
+  pg_search_scope :search,
+                  against: %i[title content],
+                  using: {
+                    tsearch: {
+                      dictionary: 'english',
+                    }
+                  }
 
   paginates_per 10
 
