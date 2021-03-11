@@ -20,6 +20,12 @@
     <%= t('due_date')%>: <%= better_distance_of_time_in_words(@project.due_date) %>
   </div>
 <% end %>
+<div>
+ <%= t('status') %>: <%= enum_name('project', 'status', @project.status) %>
+</div>
+<div>
+ <%= t('priority') %>: <%= enum_name('project', 'priority', @project.priority) %>
+</div>
 <div class="mt-3">
   <% if current_user == @project.user %>
     <%= link_to t('links.project.edit'), edit_project_path(@project),  class: 'btn btn-info mr-2'  %>

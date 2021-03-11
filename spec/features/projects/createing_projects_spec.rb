@@ -18,6 +18,8 @@ RSpec.feature 'Users can create project' do
       fill_in 'project[content]', with: 'blog content'
       fill_in 'project[start_date]', with: Time.now + 1.days
       fill_in 'project[due_date]', with: Time.now + 2.days
+      select  'Todo', from: 'project[status]'
+      select  'Low', from: 'project[priority]'
       fill_in 'Labels', with: 'blogging, ROR'
 
       click_button 'Create Project'
@@ -27,6 +29,8 @@ RSpec.feature 'Users can create project' do
       expect(page).to have_content 'blog content'
       expect(page).to have_content 'Start date: in 1 day'
       expect(page).to have_content 'Due date: in 2 days'
+      expect(page).to have_content 'Status: Todo'
+      expect(page).to have_content 'Priority: Low'
       within '.labels' do
         expect(page).to have_content 'blogging'
         expect(page).to have_content 'ROR'
@@ -41,6 +45,21 @@ RSpec.feature 'Users can create project' do
       expect(page).to have_content 'Project has not been created.'
       expect(page).to have_content "Title can't be blank"
       expect(page).to have_content "Content can't be blank"
+    end
+
+    scenario 'with due data earlier that the start date' do
+      login_as(user)
+      visit new_project_path
+
+      fill_in 'project[title]', with: 'write a blog'
+      fill_in 'project[content]', with: 'blog content'
+      fill_in 'project[start_date]', with: Time.now + 3.days
+      fill_in 'project[due_date]', with: Time.now + 1.days
+      fill_in 'Labels', with: 'blogging, ROR'
+
+      click_button 'Create Project'
+      expect(page).to have_content 'Project has not been created.'
+      expect(page).to have_content "Due date can't be earlier than start date"
     end
 
     scenario "with title same as one of your existing project" do

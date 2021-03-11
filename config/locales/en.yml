@@ -34,9 +34,15 @@ en:
     attributes:
       project:
         status:
+          one: 'Status'
           todo: 'Todo'
           doing: 'Doing'
           done: 'Done'
+        priority:
+          one: 'Priority'
+          low: 'Low'
+          medium: 'Medium'
+          high: 'High'
     errors:
       models:
         project:
