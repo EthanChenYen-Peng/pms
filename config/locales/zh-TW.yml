@@ -41,6 +41,13 @@ zh-TW:
       project:
         one: '專案'
     attributes:
+      user:
+        username: '用戶名'
+        password: '密碼'
+        password_confirmation: '確認密碼'
+        email: 'Email'
+      session:
+        email: 'asdf'
       project:
         title: '標題'
         content: '內容'
@@ -56,11 +63,6 @@ zh-TW:
           low: '低'
           medium: '中'
           high: '高'
-          user:
-        username: '用戶名'
-        email: 'Email'
-        password: '密碼'
-        password_confirmation: '確認密碼'
     errors:
       models:
         user:
@@ -102,7 +104,7 @@ zh-TW:
     sessions:
       new: '登入'
       destroy: '登出'
-    get_started: '註冊'
+    get_started: '開始註冊'
   datetime:
     distance_in_words:
       about_x_hours: "%{count} 小時"
@@ -130,3 +132,6 @@ zh-TW:
   time_to_future_in_words: '在 %{days}'
   priority: '優先順序'
   labels: '標籤'
+  login: '登入'
+  signup: '註冊'
+  signup-for-an-account: '註冊新帳號'

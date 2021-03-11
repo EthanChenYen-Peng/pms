@@ -111,3 +111,4 @@ en:
   time_ago_in_words: '%{days} ago'
   time_to_future_in_words: 'in %{days}'
   labels: 'Labels'
+  signup-for-an-account: 'Sign up for an account'
