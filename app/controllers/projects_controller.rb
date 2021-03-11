@@ -3,27 +3,27 @@ class ProjectsController < ApplicationController
   before_action :require_user
   before_action :require_the_same_user, only: %i[edit update destroy]
 
-  ORDER_DIRECTIONS = ['desc', 'asc']
-  FILEDS_TO_SORT_BY = ['created_at', 'due_date', 'priority']
-  PROJECT_STATUS = ['todo', 'doing', 'done' ]
+  ORDER_DIRECTIONS = %w[desc asc]
+  FILEDS_TO_SORT_BY = %w[created_at due_date priority]
+  PROJECT_STATUS = %w[todo doing done]
 
   def index
     set_project_query_params
-    if @selected_status == 'all'
-      @projects = current_user.projects.all
-    else
-      @projects = current_user.projects.where(status: @selected_status)
-    end
+    @projects = if @selected_status == 'all'
+                  current_user.projects.all
+                else
+                  current_user.projects.where(status: @selected_status)
+                end
 
     if params[:label_names] && params[:label_names] != ''
       @projects = @projects.joins(:labels).where('labels.name IN (?)', get_labels)
     end
 
-    if @search_terms == ''
-      @projects = @projects.order(project_sort_by_params).page(params[:page])
-    else
-      @projects = @projects.search(@search_terms).order(project_sort_by_params).page(params[:page])
-    end
+    @projects = if @search_terms == ''
+                  @projects.order(project_sort_by_params).page(params[:page])
+                else
+                  @projects.search(@search_terms).order(project_sort_by_params).page(params[:page])
+                end
   end
 
   def new
@@ -93,7 +93,9 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :content, :due_date, :start_date)
+    params.require(:project).permit(:title, :content,
+                                    :due_date, :start_date,
+                                    :status, :priority)
   end
 
   def require_the_same_user

@@ -22,4 +22,8 @@ module ApplicationHelper
       t('time_ago_in_words', days: distance_of_time_in_words_to_now(date_time))
     end
   end
+
+  def enum_name(model, enum_key, enum_val)
+    I18n.t("activerecord.attributes.#{model}.#{enum_key}.#{enum_val}")
+  end
 end

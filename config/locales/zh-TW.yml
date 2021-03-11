@@ -15,6 +15,10 @@ zh-TW:
       failure: '專案失刪除敗'
     access:
       unauthorized: '您只能編輯或刪除自己的文章'
+    priority:
+      low: '低'
+      medium: '中'
+      high: '高'
   user:
     create:
       success: '帳戶已創建'
@@ -42,7 +46,17 @@ zh-TW:
         content: '內容'
         due_date: '結束日期'
         start_date: '開始日期'
-      user:
+        status: 
+          one: '狀態'
+          todo: '待處理'
+          doing: '進行中'
+          done: '完成'
+        priority:
+          one: '優先順序'
+          low: '低'
+          medium: '中'
+          high: '高'
+          user:
         username: '用戶名'
         email: 'Email'
         password: '密碼'

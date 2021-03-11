@@ -58,7 +58,7 @@
         <h5 class="mb-1 project-title">
           <%= project.title %>
         </h5>
-        <small> <%= t('created_at') %>: <%= time_ago_in_words(project.created_at) %></small>
+        <small> <%= t('created_at') %>: <%= better_distance_of_time_in_words(project.created_at) %></small>
       </div>
       <p class="mb-1"><%= project.content %></p>
       <div>
