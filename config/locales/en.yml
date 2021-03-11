@@ -32,6 +32,9 @@
 en:
   activerecord:
     attributes:
+      user:
+        password: 'Password'
+        email: 'Email'
       project:
         status:
           one: 'Status'
