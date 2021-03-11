@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  http_basic_authenticate_with name: 'pms', password: 'pms-password' if Rails.env.production?
+  # http_basic_authenticate_with name: 'pms', password: 'pms-password' if Rails.env.production?
 
   # Allow these methods to be avaliable in views.
   helper_method :current_user, :login?
