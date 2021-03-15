@@ -47,7 +47,7 @@ RSpec.feature 'Users can create project' do
       expect(page).to have_content "Content can't be blank"
     end
 
-    scenario 'with due data earlier that the start date' do
+    scenario 'with due date earlier that the start date' do
       login_as(user)
       visit new_project_path
 
