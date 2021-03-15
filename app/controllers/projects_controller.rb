@@ -38,7 +38,7 @@ class ProjectsController < ApplicationController
       flash[:notice] = t('project.create.success')
       redirect_to project_path(@project)
     else
-      flash[:alert] = t('project.create.failure')
+      flash.now[:alert] = t('project.create.failure')
       render :new
     end
   end
@@ -55,7 +55,7 @@ class ProjectsController < ApplicationController
       flash[:notice] = t('project.update.success')
       redirect_to project_path(@project)
     else
-      flash[:alert] = t('project.update.failure')
+      flash.now[:alert] = t('project.update.failure')
       render :edit
     end
   end
