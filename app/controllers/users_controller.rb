@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       flash[:notice] = t('user.create.success')
       redirect_to root_path
     else
-      flash[:notice] = t('user.create.failure')
+      flash.now[:alert] = t('user.create.failure')
       render :new
     end
   end
