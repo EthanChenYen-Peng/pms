@@ -86,6 +86,21 @@ RSpec.feature 'Users can edit projects' do
           expect(page).to have_content('Vue')
         end
       end
+
+      it 'will not add the same label twice' do
+        click_link 'Edit Project'
+        fill_in 'Labels', with: 'bug, Vue, PMS, React'
+        click_button 'Update Project'
+
+        expect(page).to have_content 'Project has been updated'
+
+        within ".labels" do
+          expect(page).to have_content('PMS')
+          expect(page).to have_content('React')
+          expect(page).to have_content('bug')
+          expect(page).to have_content('Vue')
+        end
+      end
     end
   end
 
