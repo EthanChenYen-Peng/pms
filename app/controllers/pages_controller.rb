@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    redirect_to projects_path if login?
+    redirect_to user_projects_path(current_user) if login?
   end
 end
 
