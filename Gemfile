@@ -35,6 +35,10 @@ gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'pg_search', '~> 2.3', '>= 2.3.5'
 
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
+
+gem 'babosa', '~> 1.0', '>= 1.0.4'
+
+# An  extraction and improvement of the string code from FriendlyId,
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
