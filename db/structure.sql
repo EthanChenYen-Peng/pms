@@ -79,7 +79,8 @@ CREATE TABLE public.projects (
     status integer DEFAULT 0,
     priority integer DEFAULT 0,
     user_id bigint,
-    searchable tsvector GENERATED ALWAYS AS ((setweight(to_tsvector('english'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, COALESCE(content, ''::text)), 'B'::"char"))) STORED
+    searchable tsvector GENERATED ALWAYS AS ((setweight(to_tsvector('english'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, COALESCE(content, ''::text)), 'B'::"char"))) STORED,
+    slug character varying
 );
 
 
@@ -123,7 +124,8 @@ CREATE TABLE public.users (
     updated_at timestamp(6) without time zone NOT NULL,
     password_digest character varying,
     admin boolean DEFAULT false,
-    projects_count integer
+    projects_count integer,
+    slug character varying
 );
 
 
@@ -229,6 +231,13 @@ CREATE INDEX index_projects_on_searchable ON public.projects USING gin (searchab
 
 
 --
+-- Name: index_projects_on_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_projects_on_slug ON public.projects USING btree (slug);
+
+
+--
 -- Name: index_projects_on_title_and_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -247,6 +256,13 @@ CREATE INDEX index_projects_on_user_id ON public.projects USING btree (user_id);
 --
 
 CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
+
+
+--
+-- Name: index_users_on_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_users_on_slug ON public.users USING btree (slug);
 
 
 --
@@ -287,6 +303,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210223142713'),
 ('20210305090630'),
 ('20210310101437'),
-('20210310101809');
+('20210310101809'),
+('20210318074127'),
+('20210318075230');
 
 

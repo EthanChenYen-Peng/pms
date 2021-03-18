@@ -36,7 +36,7 @@ class ProjectsController < ApplicationController
 
     if @project.save
       flash[:notice] = t('project.create.success')
-      redirect_to project_path(@project)
+      redirect_to user_project_path(current_user, @project)
     else
       flash.now[:alert] = t('project.create.failure')
       render :new
@@ -53,7 +53,7 @@ class ProjectsController < ApplicationController
         @project.labels << label unless @project.labels.include?(label)
       end
       flash[:notice] = t('project.update.success')
-      redirect_to project_path(@project)
+      redirect_to user_project_path(current_user, @project)
     else
       flash.now[:alert] = t('project.update.failure')
       render :edit
@@ -63,7 +63,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     flash[:notice] = t('project.delete.success')
-    redirect_to projects_path
+    redirect_to user_projects_path(current_user)
   end
 
   private
@@ -91,7 +91,7 @@ class ProjectsController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params[:id])
+    @project = Project.friendly.find(params[:id])
   end
 
   def project_params

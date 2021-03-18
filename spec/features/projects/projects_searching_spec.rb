@@ -1,19 +1,20 @@
 require 'rails_helper'
 
 RSpec.feature 'Projects can be searched by title and content' do
+  let(:user) { FactoryBot.create(:user) }
+
   before :each do
     project_titles = ['Dr. Bradly Monahan', 'Luigi Wolf',
                       'Vernon Pouros', 'Grover Considine',
                       'Jimmie Wilkinson', 'react tutorial',
                       'Rails PMS', 'Rails Blog', 'Rails & React chat app']
-    user = FactoryBot.create(:user)
     login_as(user)
     project_titles.each do |title|
       FactoryBot.create(:project, title: title, user: user)
     end
   end
   scenario 'search with only lowercase' do
-    visit projects_path
+    visit user_projects_path(:en, user)
 
     fill_in 'search', with: 'rails'
     click_button 'Search'
@@ -24,7 +25,7 @@ RSpec.feature 'Projects can be searched by title and content' do
   end
 
   scenario 'search with only uppercase letter' do
-    visit projects_path
+    visit user_projects_path(:en, user)
 
     fill_in 'search', with: 'RAILS'
     click_button 'Search'

@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 RSpec.feature 'Users can edit projects' do
-  let(:user) { FactoryBot.create(:user) }
-
   context 'locale: en' do
+    let(:user) { FactoryBot.create(:user) }
     scenario 'get redirected to login path' do
       project = FactoryBot.create(:project)
-      visit edit_project_path(locale: :en, id: project.id)
+      visit edit_user_project_path(:en, user, project)
 
       expect(page).to have_content 'You need to login first.'
     end
@@ -14,7 +13,7 @@ RSpec.feature 'Users can edit projects' do
     scenario "cannot reach page to edit other user's project" do
       login_as(user)
       project = FactoryBot.create(:project)
-      visit edit_project_path(locale: :en, id: project.id)
+      visit edit_user_project_path(:en, user, project)
 
       expect(page).to have_content 'You can only edit or delete your own article'
     end
@@ -22,7 +21,7 @@ RSpec.feature 'Users can edit projects' do
     scenario 'with valid inputs' do
       login_as(user)
       project = FactoryBot.create(:project, user: user)
-      visit projects_path
+      visit user_projects_path(:en, user, project)
 
       click_link project.title
       click_link 'Edit Project'
@@ -40,7 +39,7 @@ RSpec.feature 'Users can edit projects' do
     scenario 'with invalid inputs' do
       login_as(user)
       project = FactoryBot.create(:project, user: user)
-      visit projects_path
+      visit user_projects_path(:en, user, project)
 
       click_link project.title
       click_link 'Edit Project'
@@ -55,12 +54,12 @@ RSpec.feature 'Users can edit projects' do
     end
 
     context 'when the project has labels' do
-      let(:project) { FactoryBot.create(:project) }
+      let(:project) { FactoryBot.create(:project, user: user) }
       before do
         project.labels << FactoryBot.create(:label, name: 'PMS')
         project.labels << FactoryBot.create(:label, name: 'React')
-        login_as(project.user)
-        visit project_path(locale: :en, id: project.id)
+        login_as(user)
+        visit user_project_path(:en, user, project)
       end
 
       it 'sees existing labels on the edit form' do
@@ -79,7 +78,7 @@ RSpec.feature 'Users can edit projects' do
 
         expect(page).to have_content 'Project has been updated'
 
-        within ".labels" do
+        within '.labels' do
           expect(page).to have_content('PMS')
           expect(page).to have_content('React')
           expect(page).to have_content('bug')
@@ -94,7 +93,7 @@ RSpec.feature 'Users can edit projects' do
 
         expect(page).to have_content 'Project has been updated'
 
-        within ".labels" do
+        within '.labels' do
           expect(page).to have_content('PMS')
           expect(page).to have_content('React')
           expect(page).to have_content('bug')
@@ -105,8 +104,9 @@ RSpec.feature 'Users can edit projects' do
   end
 
   context 'locale: zh-TW' do
+    let(:user) { FactoryBot.create(:user) }
     scenario 'get redirected to login path' do
-      visit new_project_path(locale: 'zh-TW')
+      visit new_user_project_path(:'zh-TW', user)
 
       expect(page).to have_content '您需要先登錄'
     end
@@ -114,7 +114,7 @@ RSpec.feature 'Users can edit projects' do
     scenario "cannot reach page to edit other user's project" do
       login_as(user)
       project = FactoryBot.create(:project)
-      visit edit_project_path(locale: 'zh-TW', id: project.id)
+      visit edit_user_project_path(:'zh-TW', user, project)
 
       expect(page).to have_content '您只能編輯或刪除自己的文章'
     end
@@ -122,7 +122,7 @@ RSpec.feature 'Users can edit projects' do
     scenario 'with valid inputs' do
       login_as(user)
       project = FactoryBot.create(:project, user: user)
-      visit projects_path(locale: 'zh-TW')
+      visit user_projects_path(:'zh-TW', user)
 
       click_link project.title
       click_link '編輯專案'
@@ -140,7 +140,7 @@ RSpec.feature 'Users can edit projects' do
     scenario 'with invalid inputs' do
       login_as(user)
       project = FactoryBot.create(:project, user: user)
-      visit projects_path(locale: 'zh-TW')
+      visit user_projects_path(:'zh-TW', user)
 
       click_link project.title
       click_link '編輯專案'

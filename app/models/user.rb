@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  extend FriendlyId
+  friendly_id :username, use: :slugged
+
   before_save { email.downcase! }
   before_destroy :can_destroy?
 

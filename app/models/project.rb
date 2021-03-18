@@ -1,4 +1,7 @@
 class Project < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   include PgSearch::Model
 
   validates :title, presence: true, uniqueness: {
