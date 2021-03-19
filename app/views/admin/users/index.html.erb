@@ -13,7 +13,7 @@
               <span class='text-white bg-info p-2 rounded-lg ml-3'>Admin</span>
             <% end %>
           </h5>
-          <small> <%= t('created_at') %>: <%= time_ago_in_words(user.created_at) %></small>
+          <small> <%= t('created_at') %>: <%= better_distance_of_time_in_words(user.created_at) %></small>
         </div>
         <small>
           Number of projects: <%= user.projects.size %>

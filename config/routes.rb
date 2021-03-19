@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /en|zh-TW/ do
     root 'pages#home'
 
-    resources :users, except: [:new] do
+    resources :users, only: [:create] do
       resources :projects
     end
 
