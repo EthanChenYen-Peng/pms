@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'When users see their projects' do
+  let(:user) { FactoryBot.create(:user) }
   before do
-
-    user = FactoryBot.create(:user)
     login_as(user)
 
     30.times do
@@ -13,7 +12,7 @@ RSpec.describe 'When users see their projects' do
   scenario 'they can click the next page to see next 10 projects' do
     projects = Project.all.order(created_at: :desc)
 
-    visit projects_path
+    visit user_projects_path(:en, user)
 
     click_on 'page-2'
 
@@ -26,7 +25,7 @@ RSpec.describe 'When users see their projects' do
   scenario 'they can click the 3rd page to see projects in 20th-30th ' do
     projects = Project.all.order(created_at: :desc)
 
-    visit projects_path
+    visit user_projects_path(:en, user)
 
     click_on 'page-3'
 

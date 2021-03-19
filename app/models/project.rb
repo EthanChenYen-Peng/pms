@@ -1,4 +1,7 @@
 class Project < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   include PgSearch::Model
 
   validates :title, presence: true, uniqueness: {
@@ -25,6 +28,10 @@ class Project < ApplicationRecord
 
   paginates_per 10
 
+  def normalize_friendly_id(input)
+    input.to_s.to_slug.normalize(transliterations: :russian).to_s
+  end
+
   priorities.each do |level, _value|
     define_method "#{level}_priority?" do
       send("#{level}?")
@@ -38,4 +45,5 @@ class Project < ApplicationRecord
   def due_date_cannot_be_earlier_than_start_date
     errors.add(:due_date, :cannot_be_earlier_than_start_date) if due_date && start_date && (due_date < start_date)
   end
+
 end

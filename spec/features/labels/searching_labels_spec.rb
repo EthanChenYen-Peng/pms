@@ -9,7 +9,7 @@ RSpec.feature 'Users can search for projects by labels' do
     label_2 = FactoryBot.create(:label, name: 'Vue')
     FactoryBot.create(:project, user: user, title: 'Vue task management app', labels: [label_2])
     login_as(user)
-    visit projects_path(locale: :en)
+    visit user_projects_path(:en, user)
   end
 
   scenario 'searching by label' do

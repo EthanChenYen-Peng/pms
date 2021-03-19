@@ -27,7 +27,7 @@ RSpec.describe 'Accessing admin panel' do
       visit admin_root_path
 
       expect(page).to have_content('You are not authorized to access this page.')
-      expect(current_path).to eq(projects_path(locale: :en))
+      expect(current_path).to eq(user_projects_path(:en, user))
     end
 
     scenario "I cannot access the page to edit other user's info" do
@@ -35,10 +35,10 @@ RSpec.describe 'Accessing admin panel' do
       user_two = FactoryBot.create(:user)
       login_as(user_one)
 
-      visit edit_admin_user_path(locale: :en, id: user_two.id)
+      visit edit_admin_user_path(:en, user_two)
 
       expect(page).to have_content('You are not authorized to access this page.')
-      expect(current_path).to eq(projects_path(locale: :en))
+      expect(current_path).to eq(user_projects_path(:en, user_one))
     end
 
     scenario "I cannot view other user's page " do
@@ -46,10 +46,10 @@ RSpec.describe 'Accessing admin panel' do
       user_two = FactoryBot.create(:user)
       login_as(user_one)
 
-      visit admin_user_path(locale: :en, id: user_two.id)
+      visit admin_user_path(:en, user_two)
 
       expect(page).to have_content('You are not authorized to access this page.')
-      expect(current_path).to eq(projects_path(locale: :en))
+      expect(current_path).to eq(user_projects_path(:en, user_one))
     end
   end
 end

@@ -15,10 +15,10 @@
 
       <% if login? %>
         <li class="nav-item">
-          <%= link_to t('links.projects.index'), projects_path, class: 'nav-link' %>
+          <%= link_to t('links.projects.index'), user_projects_path(current_user), class: 'nav-link' %>
         </li>
         <li class="nav-item">
-          <%= link_to t('links.project.new'), new_project_path, class: 'nav-link' %>
+          <%= link_to t('links.project.new'), new_user_project_path(current_user), class: 'nav-link' %>
         </li>
       <% end %>
     </ul>

@@ -114,6 +114,7 @@ zh-TW:
       x_days: "%{count} 天"
       x_hours: "%{count} 小時"
       x_minutes: "%{count} 分鐘"
+      less_than_x_minutes: "少於%{count} 分鐘"
   sort: '排序'
   search: '搜索'
   status: '狀態'

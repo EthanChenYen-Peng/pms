@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature 'Projects can be sorted' do
+  let(:user) { FactoryBot.create(:user) }
   before :each do
-    user = FactoryBot.create(:user)
     login_as(user)
     FactoryBot.create(:project, title: 'project 1',
                                 created_at: Date.today,
@@ -22,14 +22,14 @@ RSpec.feature 'Projects can be sorted' do
   end
 
   scenario 'by default with "created_at" field in "descending" order ' do
-    visit projects_path
+    visit user_projects_path(:en, user)
     displayed_project_titles = page.find_all('.project-title').map(&:text)
     expected_project_titles = ['project 2', 'project 1', 'project 3']
     expect(displayed_project_titles).to eq(expected_project_titles)
   end
 
   scenario 'by "due_date" field with "descending" order' do
-    visit projects_path
+    visit user_projects_path(:en, user)
 
     select 'Due date', from: 'sort_by'
     select 'Descending', from: 'order_direction'
@@ -41,7 +41,7 @@ RSpec.feature 'Projects can be sorted' do
   end
 
   scenario 'by "due_date" field with "ascending" order' do
-    visit projects_path
+    visit user_projects_path(:en, user)
 
     select 'Due date', from: 'sort_by'
     select 'Ascending', from: 'order_direction'
@@ -53,7 +53,7 @@ RSpec.feature 'Projects can be sorted' do
   end
 
   scenario 'by "start_date" field with "descending" order' do
-    visit projects_path
+    visit user_projects_path(:en, user)
 
     select 'Start date', from: 'sort_by'
     select 'Descending', from: 'order_direction'
@@ -65,7 +65,7 @@ RSpec.feature 'Projects can be sorted' do
   end
 
   scenario 'by "start_date" field with "ascending" order' do
-    visit projects_path
+    visit user_projects_path(:en, user)
 
     select 'Start date', from: 'sort_by'
     select 'Ascending', from: 'order_direction'
@@ -77,7 +77,7 @@ RSpec.feature 'Projects can be sorted' do
   end
 
   scenario 'by "priority" field with "descending" order' do
-    visit projects_path
+    visit user_projects_path(:en, user)
 
     select 'Priority', from: 'sort_by'
     select 'Descending', from: 'order_direction'
@@ -89,7 +89,7 @@ RSpec.feature 'Projects can be sorted' do
   end
 
   scenario 'by "priority" field with "ascending" order' do
-    visit projects_path
+    visit user_projects_path(:en, user)
 
     select 'Priority', from: 'sort_by'
     select 'Ascending', from: 'order_direction'

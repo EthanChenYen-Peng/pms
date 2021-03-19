@@ -9,7 +9,7 @@ RSpec.feature 'User should see our custom error page' do
 
   context 'locale: :en' do
     scenario 'when page not found users should see 404 page' do
-      visit project_path(locale: :en, id: 23)
+      visit user_project_path(:en, user, 23)
 
       expect(page).to have_content 'The page you are requesting does not exist!'
     end
@@ -23,7 +23,7 @@ RSpec.feature 'User should see our custom error page' do
 
   context 'locale: :zh-TW' do
     scenario 'when page not found users should see 404 page' do
-      visit project_path(locale: :'zh-TW', id: 23)
+      visit user_project_path(:'zh-TW', user, 23)
 
       expect(page).to have_content '此頁面不存在！'
     end

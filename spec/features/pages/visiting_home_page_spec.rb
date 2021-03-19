@@ -12,13 +12,12 @@ RSpec.feature 'Visiting homepage' do
   end
 
   context 'authenticated user' do
-    before do
-      login_as(FactoryBot.create(:user))
-    end
     scenario 'get redirected to his own project page' do
+      user = FactoryBot.create(:user)
+      login_as(user)
       visit root_path
 
-      expect(current_path).to eq(projects_path(locale: :en))
+      expect(current_path).to eq(user_projects_path(:en, user))
     end
   end
 end

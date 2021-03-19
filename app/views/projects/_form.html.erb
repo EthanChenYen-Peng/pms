@@ -1,4 +1,4 @@
-<%= form_with(model: project, local: true) do |f|  %>
+<%= form_with(model: [current_user, project], local: true) do |f|  %>
   <% if project.errors.any? %>
     <%= render 'shared/errors', errors: project.errors %>
   <% end %>
