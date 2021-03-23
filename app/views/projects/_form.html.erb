@@ -43,7 +43,7 @@
   <div class='form-group labels'>
     <%= label_tag :label_names, t('labels') %>
     <%= render @project.labels, project: @project %>
-    <%= text_field_tag :label_names, "", class: 'form-control' %>
+    <%= text_field_tag :label_names, @project.label_str, class: 'form-control' %>
   </div>
   <%= f.submit nil, class: 'btn btn-info' %>
 <% end %>

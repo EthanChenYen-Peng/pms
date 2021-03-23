@@ -53,7 +53,7 @@ RSpec.feature 'Users can edit projects' do
       expect(page).to have_content "Title can't be blank"
     end
 
-    context 'when the project has labels' do
+    context 'when project has labels' do
       let(:project) { FactoryBot.create(:project, user: user) }
       before do
         project.labels << FactoryBot.create(:label, name: 'PMS')
@@ -62,7 +62,7 @@ RSpec.feature 'Users can edit projects' do
         visit user_project_path(:en, user, project)
       end
 
-      it 'sees existing labels on the edit form' do
+      it 'can see existing labels on the edit form' do
         click_link 'Edit Project'
 
         within '.labels' do
@@ -71,9 +71,9 @@ RSpec.feature 'Users can edit projects' do
         end
       end
 
-      it 'can add new labels to a project' do
+      it 'can add new labels to the project' do
         click_link 'Edit Project'
-        fill_in 'Labels', with: 'bug, Vue'
+        fill_in 'Labels', with: 'bug, Vue, PMS, React'
         click_button 'Update Project'
 
         expect(page).to have_content 'Project has been updated'
@@ -81,6 +81,19 @@ RSpec.feature 'Users can edit projects' do
         within '.labels' do
           expect(page).to have_content('PMS')
           expect(page).to have_content('React')
+          expect(page).to have_content('bug')
+          expect(page).to have_content('Vue')
+        end
+      end
+
+      it 'can delete labels from the project via update form' do
+        click_link 'Edit Project'
+        fill_in 'Labels', with: 'bug, Vue'
+        click_button 'Update Project'
+
+        expect(page).to have_content 'Project has been updated'
+
+        within '.labels' do
           expect(page).to have_content('bug')
           expect(page).to have_content('Vue')
         end

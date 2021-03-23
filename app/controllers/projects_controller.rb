@@ -49,9 +49,8 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      processed_labels.each do |label|
-        @project.labels << label unless @project.labels.include?(label)
-      end
+      @project.labels.delete_all
+      @project.labels << processed_labels
       flash[:notice] = t('project.update.success')
       redirect_to user_project_path(current_user, @project)
     else

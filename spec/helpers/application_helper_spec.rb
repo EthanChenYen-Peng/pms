@@ -58,4 +58,5 @@ RSpec.describe ApplicationHelper do
       expect(helper.enum_name('project', 'status', 'done')).to eq('Done')
     end
   end
+
 end
