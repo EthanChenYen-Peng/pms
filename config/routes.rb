@@ -3,11 +3,9 @@ Rails.application.routes.draw do
     root 'pages#home'
 
     resources :users, only: [:create] do
-      resources :projects
-    end
-
-    scope path: 'projects/:project_id', as: :project do
-      delete 'labels/remove/:id', to: 'labels#remove', as: :remove_label
+      resources :projects do
+        resources :labels, only: [:destroy]
+      end
     end
 
     get '/signup', to: 'users#new'
