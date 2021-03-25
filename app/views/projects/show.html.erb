@@ -7,7 +7,7 @@
 <% if @project.labels.any?  %>
   <h2><%= t('labels') %> :</h2>
   <div class="labels my-2">
-    <%= render @project.labels, project: @project %>
+    <%= render 'labels/labels', labels: @project.labels, project: @project %>
   </div>
 <% end %>
 <% if @project.start_date %>

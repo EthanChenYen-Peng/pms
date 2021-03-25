@@ -1,0 +1,12 @@
+<div  data-controller='label'>
+  <% labels.each do |label| %>
+    <div class="label" 
+         data-label-id="<%= label.id %>"
+         data-label-project-id="<%= project.slug %>" >
+         <span id="remove-label-btn-<%= "#{label.id}" %>">
+           <i class="fas fa-times text-danger" data-action='click->label#destroy'></i>
+         </span>
+         <%= label.name %>
+    </div>
+  <% end %>
+</div>

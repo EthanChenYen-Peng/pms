@@ -46,4 +46,7 @@ class Project < ApplicationRecord
     errors.add(:due_date, :cannot_be_earlier_than_start_date) if due_date && start_date && (due_date < start_date)
   end
 
+  def label_str
+    self.labels.sort.map { |label| label.name }.join(', ')
+  end
 end

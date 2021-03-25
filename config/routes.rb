@@ -6,8 +6,8 @@ Rails.application.routes.draw do
       resources :projects
     end
 
-    scope path: 'projects/:project_id', as: :project do
-      delete 'labels/remove/:id', to: 'labels#remove', as: :remove_label
+    scope '/projects/:project_id', as: 'projects' do
+      resources :labels, only: [:destroy]
     end
 
     get '/signup', to: 'users#new'

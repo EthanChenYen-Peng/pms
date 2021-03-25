@@ -129,4 +129,26 @@ RSpec.describe Project do
       end
     end
   end
+
+  describe '#label_str' do
+    context 'with a few labels' do
+      it 'returns all label names joined as string' do
+        project = Project.new
+        labels = [
+          Label.new(name: 'ROR'),
+          Label.new(name: 'Metaprogramming'),
+          Label.new(name: 'Database indexing blog'),
+        ]
+        project.labels << labels
+        expect(project.label_str).to eq('ROR, Metaprogramming, Database indexing blog')
+      end
+    end
+
+    context 'with no label' do
+      it 'returns empty string' do
+        project = Project.new
+        expect(project.label_str).to eq('')
+      end
+    end
+  end
 end
