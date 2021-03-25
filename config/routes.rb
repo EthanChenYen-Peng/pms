@@ -3,9 +3,11 @@ Rails.application.routes.draw do
     root 'pages#home'
 
     resources :users, only: [:create] do
-      resources :projects do
-        resources :labels, only: [:destroy]
-      end
+      resources :projects
+    end
+
+    scope '/projects/:project_id', as: 'projects' do
+      resources :labels, only: [:destroy]
     end
 
     get '/signup', to: 'users#new'
