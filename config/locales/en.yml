@@ -92,6 +92,7 @@ en:
       delete: 'Delete Project'
     users:
       new: 'Sign Up'
+      update: 'Update Profile'
     sessions:
       new: 'Login'
       destroy: 'Logout'

@@ -101,6 +101,7 @@ zh-TW:
       delete: '刪除專案'
     users:
       new: '註冊'
+      update: 'Update Profile'
     sessions:
       new: '登入'
       destroy: '登出'

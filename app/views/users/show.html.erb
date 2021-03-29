@@ -1,0 +1,12 @@
+<div class="mt-5">
+  <div class='d-flex justify-content-between'>
+    <div>
+      <h2><%= current_user.username %></h2> 
+      <h5><%= current_user.email %></h5>
+    </div>
+    <div>
+      <%= link_to "Edit", edit_user_path(current_user), class: 'btn btn-success' %> 
+      <%= link_to "Delete", user_path(current_user), method: :delete,  class: 'btn btn-danger' %> 
+    </div>
+  </div>
+</div>
