@@ -36,6 +36,9 @@
             </span>
           <% end %>
         </li>
+        <li class="nav-item" >
+          <%= avatar(current_user, 60) %>
+        </li>
         <li class="nav-item">
           <%= link_to t('links.sessions.destroy'), logout_path, method: :delete ,class: 'nav-link' %>
         </li>

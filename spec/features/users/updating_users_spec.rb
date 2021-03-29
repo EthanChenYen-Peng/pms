@@ -18,4 +18,5 @@ RSpec.describe 'User can update her profile' do
       expect(page).to have_content 'ypcethan@gmail.com'
     end
   end
+
 end
